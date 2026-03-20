@@ -33,7 +33,7 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.844);
+  background: rgba(0, 0, 0, 0.567);
 }
 
 /* 3️⃣ Card de login */
@@ -43,8 +43,10 @@
   padding: 40px 30px;
   border-radius: 20px;
   backdrop-filter: blur(10px);
-  background: rgba(25, 9, 51, 0.453);
+  background: rgba(25, 9, 51, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: rgb(255, 255, 255);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
   text-align: center;
   z-index: 1;
 }
@@ -85,7 +87,7 @@
 
 .field label {
   font-size: 14px;
-  color: #b8e7ff;
+  color: #9fbcd3;
 }
 
 /* Inputs */
@@ -93,11 +95,12 @@
   width: 100%;
   padding: 14px 16px;
   border-radius: 12px;
-  border: none;
   outline: none;
-  background: #e9e9e9;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.1);
   font-size: 14px;
-  color: #333;
+  
 }
 
 /* Wrapper para input + ícone */
@@ -148,27 +151,26 @@
 
 /* Botão principal */
 .primary {
-  background: black;
-  color: white;
+  background: #00ffae;
+  color: #000;;
+  text-decoration:none;
   font-weight:bold;
 
 }
 
 .primary:hover {
-  background: #111;
   transform: scale(1.02);
 }
 
 /* Botão secundário */
 .secondary {
-  background: black;
-  color: white;
-  margin-top: -5px;
+  background: #00ffae;
+  color: #000;;
+  text-decoration:none;
   font-weight:bold;
 }
 
 .secondary:hover {
-  background: #111;
   transform: scale(1.02);
 }
 
