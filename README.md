@@ -12,17 +12,6 @@ O objetivo é criar a base da interface para posteriormente integrar **funcional
 <img src= "img/telainicial.png" alt="Preview da página">
 Tela inicial - Home
 
-<img src= "img/footer.png" alt="Continuação tela inicial">
-Continuação tela inicial
-
-<img src= "img/telalogin.png" alt="Tela de login">
-Tela de login
-
-<img src= "img/teladecadastro.png" alt="Tela de Cadastro">
-Tela de cadastro
-
-    
-
 ## 🚀 Tecnologias utilizadas
 
 <div align="center">
@@ -36,8 +25,10 @@ Tela de cadastro
     flex-wrap:wrap;
   ">
 
-  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
+  <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E">
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
+  
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
   </div>
 </div>
 
@@ -48,6 +39,8 @@ Tela de cadastro
 - Página inicial
 - Tela de login
 - Tela de cadastro
+- Tela de recuperação de senha
+- Tela de perfil do usuário
 
 Essas páginas representam a **fase inicial de prototipagem da interface** do sistema.
 
@@ -57,13 +50,11 @@ Essas páginas representam a **fase inicial de prototipagem da interface** do si
 
 O projeto será expandido com:
 
-- JavaScript para interatividade
 - Backend utilizando **Python (FastAPI)**
 - Banco de dados **PostgreSQL**
-- Possível uso de **React** para componentes da interface
 
 ---
 
 ## Status
 
-🚧 Projeto em desenvolvimento – fase inicial de protótipo da interface.
+🚧 Projeto em desenvolvimento – fase inicial de implementação da interface.
