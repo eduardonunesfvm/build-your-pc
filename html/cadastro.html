@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
   <main class="page">
@@ -44,6 +45,7 @@
             type="email" 
             id="email" 
             placeholder="Digite seu E-mail"
+            autocapitalize="none"
             required
           >
         </div>
@@ -53,8 +55,9 @@
           <label for="username">Usuário</label>
           <input 
             type="text" 
-            id="username" 
+            id="usuario" 
             placeholder="Digite seu nome de usuário"
+            autocapitalize="none"
             required
           >
         </div>
@@ -75,11 +78,23 @@
           </div>
         </div>
 
-        <a href="#" class="forgot-password">
-          Esqueci minha senha
-        </a>
+       <!-- Confirmar Senha -->
+        <div class="field password-field">
+          <label for="confirm-password">Confirmar Senha</label>
+          <div class="input-wrapper">
+            <input 
+              type="password" 
+              id="confirm-password" 
+              placeholder="Confirme sua senha"
+              required
+            >
+            <button type="button" class="toggle-password">
+              👁
+            </button>
+          </div>
+        </div>
 
-       <button class="btn">Registre-se</button>
+       <button class="btn">Cadastrar</button>
 
         <p class="register-text">
           Já possui uma conta?
@@ -102,5 +117,6 @@
     </section>
   </main>
 
+  <script src="../js/auth.js"></script>
 </body>
 </html>

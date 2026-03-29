@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meu Perfil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="../css/perfil.css"/>
+</head>
+<body>
+
+  <div class="header">
+    <a href="index.html"><i class="fa-solid fa-arrow-left"></i></a>
+    <div>
+      <h1>PERFIL</h1>
+      <p>Gerencie suas informações</p>
+    </div>
+  </div>
+
+  <div class="banner">
+    <div class="avatar">
+      <i class="fa-solid fa-user"></i>
+    </div>
+  </div>
+
+  <div class="conteudo">
+
+    <!-- Informações pessoais -->
+    <div class="card" id="card-info">
+      <div class="card-titulo">
+        INFORMAÇÕES PESSOAIS
+        <button class="btn btn-editar" onclick="ativarEdicao()">Editar</button>
+        <button class="btn btn-salvar" onclick="salvarInfo()">Salvar</button>
+      </div>
+
+      <div class="campo">
+        <label><i class="fa-regular fa-user"></i> Nome</label>
+        <p id= "exibe-nome">—</p>
+        <input id="input-nome" type="text" placeholder="Seu nome" autocapitalize="words" />
+      </div>
+
+      <div class="campo">
+        <label><i class="fa-regular fa-envelope"></i> Email</label>
+        <p id="exibe-email">—</p>
+        <input id="input-email" type="email" placeholder="Seu e-mail" />
+      </div>
+
+      <div class="campo">
+        <label><i class="fa-regular fa-user"></i> Usuário</label>
+        <p id="exibe-usuario">—</p>
+        <small>O nome de usuário não pode ser alterado</small>
+      </div>
+    </div>
+
+    <!-- Alterar senha -->
+    <div class="card">
+      <div class="card-titulo">ALTERAR SENHA</div>
+
+      <div class="campo">
+        <label><i class="fa-solid fa-lock"></i> Senha atual</label>
+        <div class="input-wrapper">
+          <input type="password" id="senha-atual" placeholder="Digite sua senha atual" />
+          <button onclick="verSenha('senha-atual', this)"><i class="fa-regular fa-eye"></i></button>
+        </div>
+      </div>
+
+      <div class="campo">
+        <label><i class="fa-solid fa-lock"></i> Nova senha</label>
+        <div class="input-wrapper">
+          <input type="password" id="senha-nova" placeholder="Digite sua nova senha" />
+          <button onclick="verSenha('senha-nova', this)"><i class="fa-regular fa-eye"></i></button>
+        </div>
+      </div>
+
+      <div class="campo">
+        <label><i class="fa-solid fa-lock"></i> Confirmar nova senha</label>
+        <div class="input-wrapper">
+          <input type="password" id="senha-confirma" placeholder="Confirme sua nova senha" />
+          <button onclick="verSenha('senha-confirma', this)"><i class="fa-regular fa-eye"></i></button>
+        </div>
+      </div>
+
+      <button class="btn-cheio btn-verde" onclick="alterarSenha()">
+        <i class="fa-solid fa-lock"></i> Alterar Senha
+      </button>
+    </div>
+
+    <!-- Sair -->
+    <button class="btn-cheio btn-vermelho" onclick="sair()">
+      <i class="fa-solid fa-right-from-bracket"></i> Sair da Conta
+    </button>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="../js/perfil.js"></script>
+</body>
+</html>

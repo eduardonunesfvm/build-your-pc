@@ -33,7 +33,7 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.567);
+  background: rgba(0, 0, 0, 0.289);
 }
 
 /* 3️⃣ Card de login */
@@ -43,8 +43,8 @@
   padding: 40px 30px;
   border-radius: 20px;
   backdrop-filter: blur(10px);
-  background: rgba(25, 9, 51, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgb(32, 12, 66);
+  border: 1px solid rgba(255, 255, 255, 0.366);
   color: rgb(255, 255, 255);
   box-shadow: 0 20px 60px rgba(0,0,0,0.6);
   text-align: center;

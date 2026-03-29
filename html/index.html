@@ -9,7 +9,6 @@
 
 <link rel="stylesheet" href="../css/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
-
 </head>
 <body>
 <header>
@@ -26,9 +25,17 @@
 </ul>
 </nav>
 
-<div class="auth">
-<a class="btn-login" href="login.html">Login</a>
-<a class="btn" href="cadastro.html">Cadastre-se</a>
+<!-- Visitante (não logado) -->
+<div class="auth" id="menu-guest">
+  <a class="btn-login" href="login.html">Login</a>
+  <a class="btn" href="cadastro.html">Cadastre-se</a>
+</div>
+
+<!-- Logado -->
+<div class="auth" id="menu-user" style="display: none;">
+  <span id="user-nome"></span>
+  <a class="btn-login" href="perfil.html">Meu Perfil</a>
+  <button class="btn" onclick="fazerLogout()">Sair</button>
 </div>
 
 </div>
@@ -113,5 +120,6 @@ Receba ajuda para escolher peças compatíveis e montar seu setup ideal.
 
 </footer>
 
+    <script src="../js/auth.js"></script>
 </body>
 </html>

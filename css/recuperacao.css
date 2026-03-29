@@ -5,7 +5,7 @@
   box-sizing: border-box;
 }
 
-.register-card {
+.login-card {
   opacity: 0;
   transform: translateY(8px);
   animation: fadeUp 0.35s ease-out forwards;
@@ -33,14 +33,14 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.567);
+  background: rgba(0, 0, 0, 0.436);
 }
 
-/* 3️⃣ Card de registro */
-.register-card {
+/* 3️⃣ Card de login */
+.login-card {
   position: relative;
   width: 380px;
-  padding: 50px 30px;
+  padding: 40px 30px;
   border-radius: 20px;
   backdrop-filter: blur(10px);
   background: rgba(25, 9, 51, 0.95);
@@ -51,12 +51,12 @@
   z-index: 1;
 }
 
-/* 4️⃣ Header (BYP + cadastro) */
-.register-header {
-  margin-bottom: 40px;
+/* 4️⃣ Header (BYP + Login) */
+.login-header {
+  margin-bottom: 30px;
 }
 
-.register-header .logo {
+.login-header .logo {
   font-size: 48px;
   letter-spacing: 4px;
   margin-bottom: 5px;
@@ -64,10 +64,11 @@
   
 }
 
-.register-header .subtitle {
+.login-header .subtitle {
   font-size: 20px;
   font-weight: 300;
   letter-spacing: 2px;
+  margin-bottom: 20px;
   font-family: 'Orbitron', sans-serif;
 }
 
@@ -82,13 +83,14 @@
   display: flex;
   flex-direction: column;
   text-align: left;
+  margin-bottom: 20px;
   gap: 6px;
-  margin-bottom: 14px;
 }
 
 .field label {
   font-size: 14px;
   color: #9fbcd3;
+  
 }
 
 /* Inputs */
@@ -104,53 +106,8 @@
   
 }
 
-
-#username {
-  text-transform: capitalize;
-}
-
-/* garante que o email fica normal */
-#email {
-  text-transform: none;
-}
-/* Wrapper para input + ícone */
-.input-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.input-wrapper input {
-  padding-right: 45px;
-}
-
-/* Botão do olho */
-.toggle-password {
-  position: absolute;
-  right: 12px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  color: #555;
-}
-
-/* Esqueci senha */
-.forgot-password {
-  display: block;
-  text-align: left;
-  margin: 10px 0 5px 0;
-  font-size: 14px;
-  color: #bfe6ff;
-  text-decoration: none;
-}
-
-.forgot-password:hover {
-  text-decoration: underline;
-}
-
 /* Botões base */
-  .btn {
+.btn {
   width: 100%;
   padding: 14px;
   border-radius: 25px;
@@ -159,54 +116,15 @@
   letter-spacing: 1px;
   cursor: pointer;
   transition: 0.3s ease;
-  display: block;
-  width: 100%;
-  margin-top: 15px;
+}
 
+/* Botão principal */
+.primary {
   background: #00ffae;
   color: #000;;
   text-decoration:none;
   font-weight:bold;
-}
-
-/* Botão de registro mouse em cima */
-.btn:hover {
-  background: #00d494;
-  transform: scale(1.02);
-}
-
-/* Texto cadastro */
-.register-text {
-  font-size: 13px;
-  margin-top: 10px;
-  margin-bottom: -8px;
-  color: #ddd;
-}
-
-/* Footer */
-.register-footer {
-  margin-top: 25px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
-}
-
-/* Ícones sociais */
-.social-icons {
-  display: flex;
-  gap: 20px;
-}
-
-.social-icons a {
-  text-decoration: none;
-  font-size: 18px;
-  color: white;
-  transition: 0.3s;
-}
-
-.social-icons a:hover {
-  opacity: 0.7;
+  margin-bottom: 20px;
 }
 
 /* Voltar */
