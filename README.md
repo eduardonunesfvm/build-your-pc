@@ -1,7 +1,7 @@
-# Projeto Integrador – Protótipo da Interface
+# Projeto Integrador - Faculdade Insted
 
-Este repositório contém as **primeiras telas do protótipo** do projeto integrador.  
-Nesta etapa foi desenvolvida a **estrutura visual da aplicação**, definindo layout, navegação e organização das páginas utilizando apenas HTML e CSS.
+Este repositório contém as **primeiras telas** do projeto integrador.  
+Nesta etapa foi desenvolvida a **estrutura visual da aplicação**, definindo layout, navegação e organização das páginas utilizando apenas JavaScript, HTML e CSS.
 
 O objetivo é criar a base da interface para posteriormente integrar **funcionalidades, backend e banco de dados**.
 
