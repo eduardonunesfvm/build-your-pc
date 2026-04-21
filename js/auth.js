@@ -6,7 +6,7 @@
 
 // ── FUNÇÕES BASE ─────────────────────────────────────────────
 
-function fazerLogin(nome) {
+function fazerLogin() {
   localStorage.setItem('logado', 'true')  // só marca que está logado
 }
 
@@ -50,38 +50,63 @@ function atualizarMenu() {
 }
 
 
-// ── FORMULÁRIO DE LOGIN ──────────────────────────────────────
+// ... (mantenha as funções base e menu dinâmico)
 
+// ── FORMULÁRIO DE LOGIN ──────────────────────────────────────
 const loginForm = document.querySelector('.login-form')
 
 if (loginForm) {
   loginForm.addEventListener('submit', function(e) {
     e.preventDefault()
-    localStorage.setItem('logado', 'true')  // só isso
+    
+    const senha = document.getElementById('password').value
+
+    if (senha.length < 8) {
+      alert('A senha deve ter no mínimo 8 caracteres.')
+      return
+    }
+
+    localStorage.setItem('logado', 'true') 
     window.location.href = '../html/index.html'
   })
 }
 
-
 // ── FORMULÁRIO DE CADASTRO ───────────────────────────────────
-
-const cadastroForm = document.querySelector('.cadastro-form')
+const cadastroForm = document.querySelector('.cadastro-form');
 
 if (cadastroForm) {
   cadastroForm.addEventListener('submit', function(e) {
-    e.preventDefault()
+    e.preventDefault();
 
-    const nome    = document.getElementById('username').value
-    const email   = document.getElementById('email').value
-    const usuario = document.getElementById('usuario').value
+    // Captura dos elementos (verificando se os IDs existem)
+    const campoNome = document.getElementById('username');
+    const campoEmail = document.getElementById('email');
+    const campoSenha = document.getElementById('password');
+    const campoConfirma = document.getElementById('confirm-password');
 
-    localStorage.setItem('nome',    nome)
-    localStorage.setItem('email',   email)
-    localStorage.setItem('usuario', usuario)
-    localStorage.setItem('logado',  'true')  // marca como logado
+    // Validações
+    if (campoSenha.value.length < 8) {
+      alert('A senha deve ter no mínimo 8 caracteres.');
+      return;
+    }
 
-    window.location.href = '../html/index.html'
-  })
+    if (campoSenha.value !== campoConfirma.value) {
+      alert('As senhas não coincidem!');
+      return;
+    }
+
+    // Salva no LocalStorage
+    localStorage.setItem('nome', campoNome.value);
+    localStorage.setItem('email', campoEmail.value);
+
+    localStorage.setItem('logado', 'true');
+
+    console.log("Cadastro realizado! Redirecionando...");
+
+    // Tente usar apenas 'index.html' se os arquivos estiverem na mesma pasta
+    // Se estiverem em pastas diferentes, mantenha '../html/index.html'
+    window.location.href = '../html/index.html'; 
+  });
 }
 
 

@@ -67,7 +67,7 @@
         return;
       }
 
-      // aqui você vai chamar o back-end futuramente
+  
       mostrarToast('Senha alterada com sucesso!');
       document.getElementById('senha-atual').value    = '';
       document.getElementById('senha-nova').value     = '';

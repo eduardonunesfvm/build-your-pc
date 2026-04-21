@@ -33,7 +33,7 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.567);
+  background: rgba(0, 0, 0, 0.434);
 }
 
 /* 3️⃣ Card de registro */
@@ -178,8 +178,9 @@
 /* Texto cadastro */
 .register-text {
   font-size: 13px;
-  margin-top: 10px;
-  margin-bottom: -8px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-decoration: none;
   color: #ddd;
 }
 
@@ -222,3 +223,9 @@
 .back-link:hover {
   text-decoration: underline;
 }
+
+.required {
+  color: #ff4d4d;
+  margin-left: 4px;
+}
+

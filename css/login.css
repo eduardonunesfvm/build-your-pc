@@ -221,3 +221,8 @@
 .back-link:hover {
   text-decoration: underline;
 }
+
+.required {
+  color: #ff4d4d;
+  margin-left: 4px;
+}

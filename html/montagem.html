@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BYP — Monte seu PC</title>
+  <link rel="stylesheet" href="../css/montagem.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  
+</head>
+<body>
+  <!-- HEADER -->
+ <header class="header">
+    <a href="index.html" class="header-logo">BYP</a>
+    
+    <div class="header-titulo">MONTE SEU PC</div>
+
+    <div class="header-direita">
+        <div class="header-total">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="total-label">Total</span>
+            <span class="total-valor" id="total-geral">R$ 0</span>
+        </div>
+        
+        <button class="btn-nova" id="btn-historico">MINHAS BUILDS</button>
+        <button class="btn-salvar" onclick="salvarBuild()">SALVAR CONFIGURAÇÃO</button>
+        <button class="btn-nova" onclick="novaBuild()">NOVA BUILD</button>
+    </div>
+</header>
+
+  
+
+  <!-- OVERLAY -->
+  <div class="overlay" id="overlay" onclick="fecharPainel()"></div>
+
+  <!-- PAINEL LATERAL -->
+  <div class="painel" id="painel">
+    <div class="painel-header">
+      <span class="painel-titulo" id="painel-titulo">COMPONENTE</span>
+      <button class="painel-fechar" onclick="fecharPainel()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="painel-busca">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="busca-input" placeholder="Buscar componente..." oninput="filtrarOpcoes()"/>
+    </div>
+    <div class="painel-lista" id="painel-lista"></div>
+  </div>
+
+  <!-- GRID -->
+  <div class="wrapper">
+    <div class="coluna">
+      <p class="coluna-titulo">PEÇA</p>
+      <div id="lista-pecas"></div>
+    </div>
+    <div class="coluna coluna-direita">
+      <p class="coluna-titulo">SELECIONADO</p>
+      <div id="lista-selecionados"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="../js/montagem.js"></script>
+</body>
+</html>
