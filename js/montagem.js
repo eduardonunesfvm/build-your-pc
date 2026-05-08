@@ -5,41 +5,43 @@
     }
 
     var pecas = [
+        // Exemplo de como deve ficar o array de processadores
       {
         id: 'processador', categoria: 'PROCESSADOR',
         opcoes: [
-          { nome: 'Intel Core i5-13400F', detalhe: '10 cores, 16 threads, 4.6GHz', preco: 1199 },
-          { nome: 'Intel Core i7-13700K', detalhe: '16 cores, 24 threads, 5.4GHz', preco: 1899 },
-          { nome: 'AMD Ryzen 5 7600X',    detalhe: '6 cores, 12 threads, 5.3GHz',  preco: 1349 },
-          { nome: 'AMD Ryzen 7 7700X',    detalhe: '8 cores, 16 threads, 5.4GHz',  preco: 1999 },
-          { nome: 'Intel Core i9-13900K', detalhe: '24 cores, 32 threads, 5.8GHz', preco: 3499 },
+        { nome: 'Intel Core i5-13400F', detalhe: '10 cores, 16 threads, 4.6GHz', preco: 1199, marca: 'Intel', serie: 'i5', imagem: '../img/i5.png' },
+        { nome: 'Intel Core i7-13700K', detalhe: '16 cores, 24 threads, 5.4GHz', preco: 1899, marca: 'Intel', serie: 'i7', imagem: '../img/i7.png' },
+        { nome: 'AMD Ryzen 5 7600X', detalhe: '6 cores, 12 threads, 5.3GHz', preco: 1349, marca: 'AMD', serie: 'Ryzen 5', imagem: '../img/r5.png' },
+        { nome: 'AMD Ryzen 7 7700X',    detalhe: '8 cores, 16 threads, 5.4GHz',  preco: 1999, marca: 'AMD', serie: 'Ryzen 7', imagem: '../img/r7.png' },
+        { nome: 'Intel Core i9-13900K', detalhe: '24 cores, 32 threads, 5.8GHz', preco: 3499, marca: 'Intel', serie: 'i9', imagem: '../img/i9.png' },
         ]
       },
+
       {
         id: 'placa-video', categoria: 'PLACA DE VÍDEO',
         opcoes: [
-          { nome: 'RX 6600 XT 8GB',         detalhe: 'AMD RDNA 2, 8GB GDDR6',        preco: 1399 },
-          { nome: 'RTX 3060 12GB',           detalhe: 'NVIDIA Ampere, 12GB GDDR6',    preco: 1799 },
-          { nome: 'RTX 4060 Ti 8GB',         detalhe: 'NVIDIA Ada Lovelace, 8GB',     preco: 2499 },
-          { nome: 'RX 7900 XT 20GB',         detalhe: 'AMD RDNA 3, 20GB GDDR6',       preco: 4299 },
+          { nome: 'RX 6600 XT 8GB',         detalhe: 'AMD RDNA 2, 8GB GDDR6',        preco: 1399, marca: 'AMD', serie: 'RX 6600', imagem: '../img/rx6600.png' },
+          { nome: 'RTX 3060 12GB',           detalhe: 'NVIDIA Ampere, 12GB GDDR6',    preco: 1799, marca: 'NVIDIA', serie: 'RTX 3060', imagem: '../img/rtx3060.png' },
+          { nome: 'RTX 4060 Ti 8GB',         detalhe: 'NVIDIA Ada Lovelace, 8GB',     preco: 2499, marca: 'NVIDIA', serie: 'RTX 4060 Ti', imagem: '../img/rtx4060ti.png' },
+          { nome: 'RX 7900 XT 20GB',         detalhe: 'AMD RDNA 3, 20GB GDDR6',       preco: 4299, marca: 'AMD', serie: 'RX 7900 XT', imagem: '../img/rx7900xt.png' },
         ]
       },
       {
         id: 'memoria', categoria: 'MEMÓRIA',
         opcoes: [
-          { nome: 'DDR4 16GB 3200MHz', detalhe: '2x8GB, CL16', preco: 299 },
-          { nome: 'DDR4 32GB 3600MHz', detalhe: '2x16GB, CL18', preco: 549 },
-          { nome: 'DDR5 16GB 5600MHz', detalhe: '2x8GB, CL36',  preco: 499 },
-          { nome: 'DDR5 32GB 6000MHz', detalhe: '2x16GB, CL30', preco: 899 },
+          { nome: 'DDR4 16GB 3200MHz', detalhe: '2x8GB, CL16', preco: 299, marca: ' Kingston', serie: 'DDR4', imagem: '../img/kingston-ddr4.png' },
+          { nome: 'DDR4 32GB 3600MHz', detalhe: '2x16GB, CL18', preco: 549, marca: 'Corsair', serie: 'DDR4', imagem: '../img/corsair-ddr4.png' },
+          { nome: 'DDR5 16GB 5600MHz', detalhe: '2x8GB, CL36',  preco: 499, marca: 'G.Skill', serie: 'DDR5', imagem: '../img/gskill-ddr5.png' },
+          { nome: 'DDR5 32GB 6000MHz', detalhe: '2x16GB, CL30', preco: 899, marca: 'Crucial', serie: 'DDR5', imagem: '../img/crucial-ddr5.png' },
         ]
       },
       {
         id: 'placa-mae', categoria: 'PLACA-MÃE',
         opcoes: [
-          { nome: 'B660M Pro RS DDR4',    detalhe: 'Intel LGA1700, mATX',  preco: 599 },
-          { nome: 'Z790 Aorus Elite AX',  detalhe: 'Intel LGA1700, ATX',   preco: 1799 },
-          { nome: 'B650 Steel Legend',    detalhe: 'AMD AM5, ATX',          preco: 999 },
-          { nome: 'X670E Taichi',         detalhe: 'AMD AM5, ATX',          preco: 2999 },
+          { nome: 'B660M Pro RS DDR4',    detalhe: 'Intel LGA1700, mATX',  preco: 599, marca: 'ASUS', serie: 'B660M Pro RS', imagem: '../img/asus-b660m-pro-rs-ddr4.png' },
+          { nome: 'Z790 Aorus Elite AX',  detalhe: 'Intel LGA1700, ATX',   preco: 1799, marca: 'Gigabyte', serie: 'Z790 Aorus Elite AX', imagem: '../img/gigabyte-z790-aorus-elite-ax.png' },
+          { nome: 'B650 Steel Legend',    detalhe: 'AMD AM5, ATX',          preco: 999, marca: 'MSI', serie: 'B650 Steel Legend', imagem: '../img/msi-b650-steel-legend.png' },
+          { nome: 'X670E Taichi',         detalhe: 'AMD AM5, ATX',          preco: 2999, marca: 'Gigabyte', serie: 'X670E Taichi', imagem: '../img/gigabyte-x670e-taichi.png' },
         ]
       },
       {
@@ -124,77 +126,134 @@
       calcularTotal()
     }
 
-    // ── PAINEL ─────────────────────────────────────────────────
+   // ── VARIÁVEIS DE CONTROLE DE FILTRO ──
+var filtroMarca = "";
+var filtroSerie = ""; // Caso queira filtrar por i5, i7, Ryzen 5, etc.
 
-    function abrirPainel(id) {
-      // se clicou na mesma peça, fecha
-      if (pecaAtiva == id) {
-        fecharPainel()
-        return
-      }
+// ── PAINEL ─────────────────────────────────────────────────
 
-      pecaAtiva = id
-      var peca  = getPeca(id)
-
-      document.getElementById('painel-titulo').textContent = peca.categoria
-      document.getElementById('busca-input').value = ''
-      renderizarOpcoes(peca.opcoes)
-
-      document.getElementById('painel').classList.add('aberto')
-      document.getElementById('overlay').classList.add('visivel')
-
-      renderizar()
+function abrirPainel(id) {
+    // Se clicou na mesma peça, fecha
+    if (pecaAtiva == id) {
+        fecharPainel();
+        return;
     }
 
-    function fecharPainel() {
-      pecaAtiva = null
-      document.getElementById('painel').classList.remove('aberto')
-      document.getElementById('overlay').classList.remove('visivel')
-      renderizar()
-    }
+    // RESETAR FILTROS AO ABRIR NOVA CATEGORIA
+    pecaAtiva = id;
+    filtroMarca = "";
+    filtroSerie = "";
 
-    function renderizarOpcoes(opcoes) {
-      var lista = document.getElementById('painel-lista')
-      lista.innerHTML = ''
+    var peca = getPeca(id);
 
-      if (opcoes.length == 0) {
-        lista.innerHTML = '<p style="color:#555;font-size:13px;padding:16px;">Nenhum resultado encontrado.</p>'
-        return
+    document.getElementById('painel-titulo').textContent = peca.categoria;
+    document.getElementById('busca-input').value = '';
+    
+    // Renderiza as opções iniciais
+    renderizarOpcoes(peca.opcoes);
+
+    document.getElementById('painel').classList.add('aberto');
+    document.getElementById('overlay').classList.add('visivel');
+
+    renderizar();
+}
+
+function fecharPainel() {
+    pecaAtiva = null;
+    document.getElementById('painel').classList.remove('aberto');
+    document.getElementById('overlay').classList.remove('visivel');
+    
+    // ESCONDE O PREVIEW DO FUNDO AO FECHAR
+    const containerPreview = document.getElementById('preview-lateral-container');
+    if (containerPreview) containerPreview.style.display = 'none';
+    
+    renderizar();
+}
+
+  function renderizarOpcoes(opcoes) {
+      var lista = document.getElementById('painel-lista');
+      var containerFiltros = document.getElementById('painel-filtros');
+      lista.innerHTML = '';
+      
+      // 1. GERAR BOTÕES DE MARCA
+      // Pega as marcas únicas das opções (ex: Intel, AMD)
+      const marcasExistentes = [...new Set(opcoes.map(o => o.marca).filter(m => m))];
+      
+      if (marcasExistentes.length > 0) {
+          containerFiltros.innerHTML = marcasExistentes.map(m => 
+              `<button class="btn-filtro ${filtroMarca === m ? 'ativo' : ''}" 
+                      onclick="setFiltroMarca('${m}')">${m}</button>`
+          ).join('');
+      } else {
+          containerFiltros.innerHTML = '';
       }
 
-      for (var i = 0; i < opcoes.length; i++) {
-        var op  = opcoes[i]
-        var sel = selecionados[pecaAtiva]
-        var isSel = sel && sel.nome == op.nome
-        var classSel = isSel ? ' selecionada' : ''
-        var idx = pecas.indexOf(getPeca(pecaAtiva)) // não usado aqui, usamos nome
-        lista.innerHTML +=
-          '<div class="opcao-card' + classSel + '" onclick="selecionar(\'' + op.nome + '\',' + op.preco + ',\'' + op.detalhe + '\')">' +
-            '<div class="opcao-esq">' +
-              '<span class="opcao-nome">' + op.nome + '</span>' +
-              '<span class="opcao-detalhe">' + op.detalhe + '</span>' +
-            '</div>' +
-            '<div class="opcao-dir">' +
-              '<span class="opcao-preco">R$ ' + op.preco.toLocaleString('pt-BR') + '</span>' +
-              '<i class="fa-solid fa-check opcao-check"></i>' +
-            '</div>' +
-          '</div>'
-      }
-    }
+      // 2. APLICAR FILTROS (Marca e Busca)
+      var busca = document.getElementById('busca-input').value.toLowerCase();
+      
+      let filtradas = opcoes.filter(op => {
+          const bateMarca = filtroMarca === "" || op.marca === filtroMarca;
+          const bateBusca = op.nome.toLowerCase().includes(busca);
+          return bateMarca && bateBusca;
+      });
 
-    function filtrarOpcoes() {
-      var busca = document.getElementById('busca-input').value.toLowerCase()
-      var peca  = getPeca(pecaAtiva)
-      var filtradas = []
-
-      for (var i = 0; i < peca.opcoes.length; i++) {
-        if (peca.opcoes[i].nome.toLowerCase().indexOf(busca) >= 0) {
-          filtradas.push(peca.opcoes[i])
-        }
+      // 3. RENDERIZAR OS CARDS
+      if (filtradas.length == 0) {
+          lista.innerHTML = '<p style="color:#555;font-size:13px;padding:16px;">Nenhum resultado encontrado.</p>';
+          return;
       }
 
-      renderizarOpcoes(filtradas)
-    }
+      filtradas.forEach(op => {
+          var sel = selecionados[pecaAtiva];
+          var isSel = sel && sel.nome == op.nome;
+          var classSel = isSel ? ' selecionada' : '';
+          
+          lista.innerHTML += `
+              <div class="opcao-card ${classSel}" 
+                  onclick="selecionar('${op.nome}', ${op.preco}, '${op.detalhe}')"
+                  onmouseover="atualizarPreviewGrande('${op.imagem}', '${op.nome}')">
+                  <div class="opcao-info">
+                      <span class="opcao-nome">${op.nome}</span>
+                      <span class="opcao-detalhe">${op.detalhe}</span>
+                  </div>
+                  <div class="opcao-preco">
+                      R$ ${op.preco.toLocaleString('pt-BR')}
+                      <i class="fa-solid fa-check opcao-check"></i>
+                  </div>
+              </div>`;
+      });
+  }
+
+  // ── FUNÇÕES DE CONTRELE DE UI ──────────────────────────────
+
+  function setFiltroMarca(marca) {
+      // Toggle: se clicar na mesma, desmarca
+      filtroMarca = (filtroMarca === marca) ? "" : marca;
+      var peca = getPeca(pecaAtiva);
+      renderizarOpcoes(peca.opcoes);
+  }
+
+  // Função que faz a mágica no "Espaço Vazio" à esquerda
+  function atualizarPreviewGrande(url, nome) {
+      const container = document.getElementById('preview-lateral-container');
+      const img = document.getElementById('img-preview-grande');
+      const txt = document.getElementById('preview-nome-grande');
+
+      // Só mostra se houver uma URL de imagem válida
+      if (url && url !== "undefined" && url !== "") {
+          img.src = url;
+          if (txt) txt.textContent = nome;
+          container.style.display = 'flex';
+      } else {
+          container.style.display = 'none';
+      }
+  }
+
+  // Ajuste na função de busca para conversar com os filtros
+  function filtrarOpcoes() {
+      var peca = getPeca(pecaAtiva);
+      renderizarOpcoes(peca.opcoes);
+  }
 
     // ── AÇÕES ───────────────────────────────────────────────────
 

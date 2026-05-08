@@ -29,25 +29,38 @@
     </div>
 </header>
 
-  
-
   <!-- OVERLAY -->
-  <div class="overlay" id="overlay" onclick="fecharPainel()"></div>
+<div class="overlay" id="overlay" onclick="fecharPainel()"></div>
+
+<div id="preview-lateral-container" class="preview-lateral">
+    <img id="img-preview-grande" src="" alt="">
+    <p id="preview-nome-grande"></p>
+</div>
 
   <!-- PAINEL LATERAL -->
-  <div class="painel" id="painel">
+<div class="painel" id="painel">
+    <!-- 1. Header com Título e Fechar -->
     <div class="painel-header">
-      <span class="painel-titulo" id="painel-titulo">COMPONENTE</span>
-      <button class="painel-fechar" onclick="fecharPainel()">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
+        <span class="painel-titulo" id="painel-titulo">COMPONENTE</span>
+        <button class="painel-fechar" onclick="fecharPainel()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
     </div>
+
+    <!-- 2. Busca -->
     <div class="painel-busca">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <input type="text" id="busca-input" placeholder="Buscar componente..." oninput="filtrarOpcoes()"/>
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="busca-input" placeholder="Buscar componente..." oninput="filtrarOpcoes()"/>
     </div>
+
+    <!-- 3. FILTROS (Intel, AMD, etc) - Fica bem aqui entre a busca e a lista -->
+    <div class="painel-filtros" id="painel-filtros">
+        <!-- Os botões aparecerão aqui via JS -->
+    </div>  
+
+    <!-- 4. Lista de Produtos -->
     <div class="painel-lista" id="painel-lista"></div>
-  </div>
+</div>
 
   <!-- GRID -->
   <div class="wrapper">

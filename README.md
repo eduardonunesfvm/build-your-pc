@@ -41,6 +41,7 @@ Tela inicial - Home
 - Tela de cadastro
 - Tela de recuperação de senha
 - Tela de perfil do usuário
+- Tela de montagem
 
 Essas páginas representam a **fase inicial de prototipagem da interface** do sistema.
 

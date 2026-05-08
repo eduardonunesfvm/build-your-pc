@@ -377,3 +377,50 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 5px;
 }
+
+.painel-filtros {
+    padding: 10px 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.btn-filtro {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(0, 255, 174, 0.3);
+    color: #00ffae;
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-filtro.ativo {
+    background: #00ffae;
+    color: #000;
+}
+
+.preview-lateral {
+    position: fixed;
+    top: 50%;
+    left: calc(50% - 310px); /* Ajusta para o centro do espaço vazio */
+    transform: translate(-50%, -50%);
+    z-index: 145; /* Entre o fundo (140) e o painel (150) */
+    display: none; 
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+}
+
+.preview-lateral img {
+    max-width: 450px;
+    filter: drop-shadow(0 0 20px rgba(0, 255, 174, 0.3));
+    animation: aparecer 0.3s ease;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
