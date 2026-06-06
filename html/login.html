@@ -8,27 +8,23 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
 
   <main class="page">
 
-    <!-- Overlay escuro -->
     <div class="overlay"></div>
 
-    <!-- Card de login -->
     <section class="login-card">
 
       <header class="login-header">
-
-        
         <h1 class="logo">BYP</h1>
         <h2 class="subtitle">Login</h2>
       </header>
 
       <form class="login-form">
 
-        <!-- Email -->
         <div class="field">
           <label for="email">E-mail <span class="required">*</span></label>
           <input 
@@ -39,7 +35,6 @@
           >
         </div>
 
-        <!-- Senha -->
         <div class="field password-field">
           <label for="password">Senha <span class="required">*</span></label>
           <div class="input-wrapper">
@@ -55,37 +50,41 @@
           </div>
         </div>
 
-        <a href="recuperacao_senha.html" class="forgot-password">
-          Esqueci minha senha
-        </a>
-
-        <button type="submit" class="btn primary">
-          Login
-        </button>
-
-        <p class="register-text">
-          Não possui uma conta?
-        </p>
-
-        <a href="cadastro.html">
-          Cadastre-se
-        </a>
-
-      </form>
-
-      <!-- Social -->
-      <footer class="login-footer">
-        <div class="social-icons">
-          <a href="#">X</a>
-          <a href="#">Instagram</a>
+        <div class="forgot-wrapper">
+          <a href="recuperacao_senha.html" class="forgot-password">
+            Esqueci minha senha
+          </a>
         </div>
 
-        <a href="../html/index.html" class="back-link">Voltar</a>
-      </footer>
+        <button type="submit" class="btn">Login</button>
+
+        <p class="register-text">
+          Não possui uma conta? <a href="cadastro.html" class="cadastrofinal">Cadastre-se</a>
+        </p>
+
+        <div class="sso-divider">
+          <span>ou conecte-se com</span>
+        </div>
+
+        <div class="sso-buttons">
+          <button type="button" class="btn-sso btn-google">
+            <i class="fa-brands fa-google"></i> Google
+          </button>
+          <button type="button" class="btn-sso btn-github">
+            <i class="fa-brands fa-github"></i> GitHub
+          </button>
+        </div>
+
+        <div style="text-align: center; margin-top: 15px;">
+          <a href="../html/index.html" class="back-link">Voltar</a>
+        </div>
+
+      </form>
 
     </section>
   </main>
 
+  <script src="../js/acessibilidade.js"></script>
   <script src="../js/auth.js"></script>
 </body>
 </html>

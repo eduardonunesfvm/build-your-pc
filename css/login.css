@@ -1,10 +1,11 @@
- /* Reset básico */
+/* ── RESET BÁSICO ────────────────────────────────────────── */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* ── ANIMAÇÃO DE ENTRADA ────────────────────────────────── */
 .login-card {
   opacity: 0;
   transform: translateY(8px);
@@ -18,7 +19,7 @@
   }
 }
 
-/* 1️⃣ Página inteira */
+/* ── PÁGINA INTEIRA ──────────────────────────────────────── */
 .page {
   position: relative;
   min-height: 100vh;
@@ -27,83 +28,87 @@
   justify-content: center;
   align-items: center;
   font-family: Arial, sans-serif;
+  padding: 20px 0;
 }
 
-/* 2️⃣ Overlay escuro por cima da imagem */
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.289);
+  background: rgba(0, 0, 0, 0.434);
 }
 
-/* 3️⃣ Card de login */
+/* ── CARD DE LOGIN COMPACTADO ───────────────────────────── */
 .login-card {
   position: relative;
-  width: 380px;
-  padding: 40px 30px;
+  width: 390px;
+  padding: 25px 30px; /* Reduzido para encaixe perfeito em 100% de zoom */
   border-radius: 20px;
   backdrop-filter: blur(10px);
-  background: rgb(32, 12, 66);
-  border: 1px solid rgba(255, 255, 255, 0.366);
+  background: rgba(25, 9, 51, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: rgb(255, 255, 255);
   box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-  text-align: center;
   z-index: 1;
 }
 
-/* 4️⃣ Header (BYP + Login) */
+/* ── HEADER ──────────────────────────────────────────────── */
 .login-header {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .login-header .logo {
-  font-size: 48px;
-  letter-spacing: 4px;
-  margin-bottom: 5px;
+  font-size: 34px;
+  letter-spacing: 3px;
+  margin-bottom: 2px;
   font-family: 'Orbitron', sans-serif;
-  
+  color: #fff;
 }
 
 .login-header .subtitle {
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 300;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   font-family: 'Orbitron', sans-serif;
+  color: #9fbcd3;
 }
 
-/* 5️⃣ Form */
+/* ── FORMULÁRIO E CAMPOS ────────────────────────────────── */
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
 }
-/* Campo (label + input) */
+
 .field {
   display: flex;
   flex-direction: column;
   text-align: left;
-  gap: 6px;
+  gap: 4px;
+  margin-bottom: 12px;
 }
 
 .field label {
-  font-size: 14px;
+  font-size: 12px;
   color: #9fbcd3;
 }
 
-/* Inputs */
 .field input {
   width: 100%;
-  padding: 14px 16px;
-  border-radius: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
   outline: none;
   background: rgba(255, 255, 255, 0.08);
   color: #fff;
   border: 1px solid rgba(255,255,255,0.1);
   font-size: 14px;
-  
+  transition: border-color 0.2s;
 }
 
-/* Wrapper para input + ícone */
+.field input:focus {
+  border-color: #00ffae;
+}
+
+/* Input Wrapper (Olho da Senha) */
 .input-wrapper {
   position: relative;
   display: flex;
@@ -111,118 +116,196 @@
 }
 
 .input-wrapper input {
-  padding-right: 45px;
+  padding-right: 40px;
 }
 
-/* Botão do olho */
 .toggle-password {
   position: absolute;
   right: 12px;
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 16px;
-  color: #555;
+  font-size: 14px;
+  color: #888;
 }
 
-/* Esqueci senha */
+/* Link Esqueci Minha Senha */
+.forgot-wrapper {
+  text-align: left;
+  margin-top: -4px;
+  margin-bottom: 14px;
+}
+
 .forgot-password {
   font-size: 13px;
-  color: #b8e7ff;
+  color: #9fbcd3;
   text-decoration: none;
-  align-self: flex-start;
+  transition: color 0.2s;
 }
 
 .forgot-password:hover {
+  color: #00ffae;
   text-decoration: underline;
 }
 
-/* Botões base */
+/* ── BOTÃO PRINCIPAL ────────────────────────────────────── */
 .btn {
   width: 100%;
-  padding: 14px;
-  border-radius: 25px;
+  padding: 12px;
+  border-radius: 8px;
   border: none;
   font-size: 14px;
   letter-spacing: 1px;
   cursor: pointer;
-  transition: 0.3s ease;
-}
-
-/* Botão principal */
-.primary {
+  transition: 0.2s ease;
   background: #00ffae;
-  color: #000;;
-  text-decoration:none;
-  font-weight:bold;
-
+  color: #000;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-.primary:hover {
-  transform: scale(1.02);
+.btn:hover {
+  background: #00d494;
+  transform: scale(1.01);
+  box-shadow: 0 0 15px rgba(0, 255, 174, 0.3);
 }
 
-/* Botão secundário */
-.secondary {
-  background: #00ffae;
-  color: #000;;
-  text-decoration:none;
-  font-weight:bold;
-}
-
-.secondary:hover {
-  transform: scale(1.02);
-}
-
-/* Texto cadastro */
+/* Texto Alternar para Cadastro */
 .register-text {
   font-size: 13px;
-  margin-top: 10px;
-  margin-bottom: -8px;
-  color: #ddd;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  color: #aaa;
+  text-align: center;
 }
 
-/* Footer */
-.login-footer {
-  margin-top: 25px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
-}
-
-/* Ícones sociais */
-.social-icons {
-  display: flex;
-  gap: 20px;
-}
-
-.social-icons a {
+.cadastrofinal {
+  color: #00ffae;
   text-decoration: none;
-  font-size: 18px;
-  color: white;
-  transition: 0.3s;
-}
-
-.social-icons a:hover {
-  opacity: 0.7;
-}
-
-/* Voltar */
-.back-link {
-  font-size: 14px;
   font-weight: bold;
-  color: white;
+}
+
+.cadastrofinal:hover {
+  text-decoration: underline;
+}
+
+/* ── BOTÕES DE LOGIN SOCIAL (SSO) ───────────────────────── */
+.sso-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 12px;
+  color: #555;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sso-divider::before,
+.sso-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sso-divider:not(:empty)::before { margin-right: .5em; }
+.sso-divider:not(:empty)::after { margin-left: .5em; }
+
+.sso-buttons {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.btn-sso {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-google:hover {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+.btn-github:hover {
+  background: #24292e;
+  border-color: #00ffae;
+  color: #00ffae;
+}
+
+/* Link Voltar */
+.back-link {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  color: #666;
   text-decoration: none;
   text-transform: uppercase;
-  
+  transition: color 0.2s;
 }
 
 .back-link:hover {
-  text-decoration: underline;
+  color: #ff4d4d;
 }
 
 .required {
   color: #ff4d4d;
   margin-left: 4px;
+}
+
+/* ── CLASSES INTERNAS DE ACESSIBILIDADE (BODY COPIADO) ──── */
+body.fonte-aumentar p, body.fonte-aumentar span, body.fonte-aumentar button, body.fonte-aumentar td, body.fonte-aumentar label {
+  font-size: 115% !important;
+}
+body.fonte-diminuir p, body.fonte-diminuir span, body.fonte-diminuir button, body.fonte-diminuir td, body.fonte-diminuir label {
+  font-size: 90% !important;
+}
+body.fonte-dislexia * {
+  font-family: Arial, sans-serif !important;
+  letter-spacing: 0.08em !important;
+  word-spacing: 0.12em !important;
+  line-height: 1.7 !important;
+}
+body.alto-contraste {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+body.alto-contraste .login-card {
+  background: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+body.alto-contraste * { color: #ffffff !important; }
+body.alto-contraste button, body.alto-contraste .btn {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* ── TRANSIÇÃO SUAVE ENTRE PÁGINAS (PREMIUM) ────────────── */
+body {
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out !important;
+}
+
+/* Classe ativada quando a página termina de carregar */
+body.pagina-carregada {
+  opacity: 1;
+}
+
+/* Classe ativada no momento exato em que o usuário clica para sair */
+body.pagina-saindo {
+  opacity: 0 !important;
 }

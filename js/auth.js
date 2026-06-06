@@ -1,6 +1,7 @@
 // ============================================================
 //  BYP — auth.js
-//  Responsável por: login, cadastro, logout e menu dinâmico
+//  Responsável por: login, cadastro, logout, menu dinâmico
+//  e validação de senha forte em tempo real
 // ============================================================
 
 
@@ -12,7 +13,7 @@ function fazerLogin() {
 
 function fazerLogout() {
   localStorage.setItem('logado', 'false') // só desloga, não apaga os dados
-  window.location.href = '../html/index.html'
+  navegarComTransicao('../html/index.html')
 }
 
 function getUsuario() {
@@ -50,8 +51,6 @@ function atualizarMenu() {
 }
 
 
-// ... (mantenha as funções base e menu dinâmico)
-
 // ── FORMULÁRIO DE LOGIN ──────────────────────────────────────
 const loginForm = document.querySelector('.login-form')
 
@@ -71,40 +70,84 @@ if (loginForm) {
   })
 }
 
-// ── FORMULÁRIO DE CADASTRO ───────────────────────────────────
+
+// ── FORMULÁRIO DE CADASTRO (COM SENHA FORTE LIVE) ────────────
 const cadastroForm = document.querySelector('.cadastro-form');
 
 if (cadastroForm) {
+  const campoSenha = document.getElementById('password');
+  const reqMaiuscula = document.getElementById('req-maiuscula');
+  const reqNumero = document.getElementById('req-numero');
+  const reqEspecial = document.getElementById('req-especial');
+
+  // 1. ESCUTA EM TEMPO REAL: Se os elementos existirem na página, ativa a validação visual
+  if (campoSenha && reqMaiuscula && reqNumero && reqEspecial) {
+    campoSenha.addEventListener('input', function() {
+      const senha = campoSenha.value;
+
+      // Testes baseados em Expressões Regulares (Regex)
+      const temMaiuscula = /[A-Z]/.test(senha);
+      const temNumero = /[0-9]/.test(senha);
+      const temEspecial = /[!@#$%^&*(),.?":{}|<>]/.test(senha);
+
+      // Atualiza as cores e ícones na caixinha embaixo do input
+      atualizarIconeRequisito(reqMaiuscula, temMaiuscula);
+      atualizarIconeRequisito(reqNumero, temNumero);
+      atualizarIconeRequisito(reqEspecial, temEspecial);
+    });
+  }
+
+  // Função interna auxiliar para trocar as classes de estilo e os ícones
+  function atualizarIconeRequisito(elemento, condicaoSatisfeita) {
+    const icone = elemento.querySelector('i');
+    if (condicaoSatisfeita) {
+      elemento.classList.remove('invalido');
+      elemento.classList.add('valido');
+      if (icone) icone.className = 'fa-solid fa-circle-check'; // Check verde
+    } else {
+      elemento.classList.remove('valido');
+      elemento.classList.add('invalido');
+      if (icone) icone.className = 'fa-solid fa-circle-xmark'; // X vermelho
+    }
+  }
+
+  // 2. BLINDAGEM DO SUBMIT: Valida tudo rigidamente na hora do clique em Cadastrar
   cadastroForm.addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // Captura dos elementos (verificando se os IDs existem)
     const campoNome = document.getElementById('username');
     const campoEmail = document.getElementById('email');
-    const campoSenha = document.getElementById('password');
     const campoConfirma = document.getElementById('confirm-password');
 
-    // Validações
-    if (campoSenha.value.length < 8) {
+    const senha = campoSenha.value;
+
+    // Critérios completos de segurança
+    const tamanhoValido = senha.length >= 8;
+    const temMaiuscula = /[A-Z]/.test(senha);
+    const temNumero = /[0-9]/.test(senha);
+    const temEspecial = /[!@#$%^&*(),.?":{}|<>]/.test(senha);
+
+    if (!tamanhoValido) {
       alert('A senha deve ter no mínimo 8 caracteres.');
       return;
     }
 
-    if (campoSenha.value !== campoConfirma.value) {
+    if (!temMaiuscula || !temNumero || !temEspecial) {
+      alert('Sua senha está fraca! Garanta pelo menos uma letra maiúscula, um número e um caractere especial.');
+      return;
+    }
+
+    if (senha !== campoConfirma.value) {
       alert('As senhas não coincidem!');
       return;
     }
 
-    // Salva no LocalStorage
+    // Salva as credenciais no LocalStorage
     localStorage.setItem('nome', campoNome.value);
     localStorage.setItem('email', campoEmail.value);
-
     localStorage.setItem('logado', 'true');
 
-    console.log("Cadastro realizado! Redirecionando...");
-
-    // Tente usar apenas 'index.html' se os arquivos estiverem na mesma pasta
-    // Se estiverem em pastas diferentes, mantenha '../html/index.html'
+    console.log("Cadastro realizado com sucesso! Redirecionando...");
     window.location.href = '../html/index.html'; 
   });
 }
@@ -118,10 +161,10 @@ toggleBtns.forEach(function(btn) {
   btn.addEventListener('click', function() {
     const input = btn.previousElementSibling
 
-    if (input.type === 'password') {
+    if (input && input.type === 'password') {
       input.type      = 'text'
       btn.textContent = '👁'
-    } else {
+    } else if (input) {
       input.type      = 'password'
       btn.textContent = '👁'
     }

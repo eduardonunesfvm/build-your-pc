@@ -2,125 +2,174 @@
 <html lang="pt-br">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BYP - Monte seu PC</title>
+  <title>BYP - Monte seu PC</title>
 
-<link rel="stylesheet" href="../css/style.css">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
+
 <body>
-<header>
-<div class="container nav">
+  <header>
+    <div class="container nav">
 
-<div class="logo">BYP</div>
+      <div class="logo">BYP</div>
 
-<div class="right-menu">
+      <div class="right-menu">
 
-<nav>
-<ul>
-<li><a href="../html/montagem.html">Monte seu PC</a></li>
-</ul>
-</nav>
+        <nav>
+          <ul>
+            <li><a href="../html/montagem.html">Monte seu PC</a></li>
+          </ul>
+        </nav>
 
-<!-- Visitante (não logado) -->
-<div class="auth" id="menu-guest">
-  <a class="btn-login" href="login.html">Login</a>
-  <a class="btn" href="cadastro.html">Cadastre-se</a>
-</div>
+        <div class="auth" id="menu-guest">
+          <a class="btn-login" href="login.html">Login</a>
+          <a class="btn" href="cadastro.html">Cadastre-se</a>
+        </div>
 
-<!-- Logado -->
-<div class="auth" id="menu-user" style="display: none;">
-  <span id="user-nome"></span>
-  <a class="btn-login" href="perfil.html">Meu Perfil</a>
-  <button class="btn" onclick="fazerLogout()">Sair</button>
-</div>
+        <div class="auth" id="menu-user" style="display: none;">
+          <span id="user-nome"></span>
+          <a class="btn-login" href="perfil.html">Meu Perfil</a>
+          <button class="btn" onclick="fazerLogout()">Sair</button>
+        </div>
 
-</div>
+      </div>
 
-</div>
-</header>
+    </div>
+  </header>
 
 
-<section class="hero">
+  <section class="hero">
+    <div class="overlay"></div>
+    <div class="container hero-content">
+      <div class="hero-text">
+        <h1>
+          MONTE SEU PC<br>
+          SEM<br>
+          COMPLICAÇÃO
+        </h1>
+        <p>
+          Escolha cada componente e monte o computador perfeito para você.
+        </p>
+        <a href="../html/montagem.html">
+          <button class="cta">
+            Comece a montar seu PC
+          </button>
+        </a>
+      </div>
 
-<div class="overlay"></div>
+      <div class="assistant">
+        <h3>BYP ASSISTANT</h3>
+        <p>
+          Receba ajuda para escolher peças compatíveis e montar seu setup ideal.
+        </p>
+      </div>
+    </div>
+  </section>
 
-<div class="container hero-content">
+  <section class="story-problem reveal">
+    <div class="container">
+      <div class="problem-content">
+        <h2>Montar um PC não precisa ser um quebra-cabeça</h2>
+        <p>
+          Medo de comprar uma placa de vídeo que não cabe no gabinete? Dúvida se a fonte vai aguentar a configuração ou se as memórias são compatíveis com a placa-mãe? O <strong>BYP</strong> nasceu para eliminar o risco de errar na hora de comprar o seu hardware.
+        </p>
+      </div>
+    </div>
+  </section>
 
-<div class="hero-text">
+  <section class="features">
+    <div class="container">
+      <h2>Como funciona</h2>
+      <div class="cards">
+        <div class="card reveal">
+          <div class="step-number">01</div>
+          <h3>Escolha as peças</h3>
+          <p>Explore nosso catálogo completo dividido de forma inteligente por categorias de hardware.</p>
+        </div>
 
-<h1>
-MONTE SEU PC<br>
-SEM<br>
-COMPLICAÇÃO
-</h1>
+        <div class="card reveal">
+          <div class="step-number">02</div>
+          <h3>Compatibilidade</h3>
+          <p>Nosso assistente analisa as conexões para garantir que todos os componentes funcionem juntos.</p>
+        </div>
 
-<p>
-Escolha cada componente e monte o computador perfeito para você.
-</p>
+        <div class="card reveal">
+          <div class="step-number">03</div>
+          <h3>Gerencie suas Builds</h3>
+          <p>Dê nomes personalizados para seus projetos, salve múltiplos orçamentos e edite quando quiser.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<a href="../html/montagem.html">
-<button class="cta">
-Comece a montar seu PC
-</button>
-</a>
+  <section class="differentials">
+    <div class="container">
+      <h2>Por que escolher a nossa plataforma?</h2>
+      <div class="diff-grid">
+        <div class="diff-box reveal">
+          <div class="diff-icon"><i class="fa-solid fa-microchip"></i></div>
+          <h3>Simulador Inteligente</h3>
+          <p>Nossa interface te guia passo a passo, mostrando dinamicamente as marcas e especificações técnicas de cada item.</p>
+        </div>
+        
+        <div class="diff-box reveal">
+          <div class="diff-icon"><i class="fa-solid fa-database"></i></div>
+          <h3>Painel Ativo</h3>
+          <p>Componentes integrados ao ecossistema administrativo local, garantindo preços e especificações atualizadas.</p>
+        </div>
+        
+        <div class="diff-box reveal">
+          <div class="diff-icon"><i class="fa-solid fa-folder-tree"></i></div>
+          <h3>Histórico de Projetos</h3>
+          <p>Esqueça os blocos de notas. Salve a configuração do seu PC de trabalho e do seu PC Gamer em abas separadas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-</div>
+  <section class="final-cta reveal">
+    <div class="container">
+      <h2>Pronto para tirar o seu setup do papel?</h2>
+      <p>Economize tempo, evite dores de cabeça e monte a máquina dos seus sonhos com segurança.</p>
+      <a href="../html/montagem.html" class="btn-cta-final">Monte seu Setup Agora</a>
+    </div>
+  </section>
 
+  <footer>
+    <p>© 2026 BYP - Build Your PC</p>
+  </footer>
 
-<div class="assistant">
+  <script src="../js/acessibilidade.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Pega todos os elementos que queremos animar
+      const elementosParaAnimar = document.querySelectorAll('.reveal');
 
-<h3>BYP ASSISTANT</h3>
+      // Configura o observador de telas
+      const observador = new IntersectionObserver((entradas) => {
+        entradas.forEach(entrada => {
+          // Se o elemento estiver visível na tela (pelo menos 15% dele)
+          if (entrada.isIntersecting) {
+            entrada.target.classList.add('ativo');
+            
+            // Se você quiser que a animação aconteça TODA VEZ que subir/descer, comente a linha abaixo.
+            // Deixando assim, ela roda uma vez só e o elemento fica fixo na tela.
+            observador.unobserve(entrada.target); 
+          }
+        });
+      }, {
+        threshold: 0.15 // Porcentagem do elemento que precisa aparecer para disparar (15%)
+      });
 
-<p>
-Receba ajuda para escolher peças compatíveis e montar seu setup ideal.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section class="features">
-
-<div class="container">
-
-<h2>Como funciona</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>Escolha as peças</h3>
-<p>Selecione CPU, GPU, RAM e armazenamento.</p>
-</div>
-
-<div class="card">
-<h3>Compatibilidade</h3>
-<p>Veja se todos os componentes funcionam juntos.</p>
-</div>
-
-<div class="card">
-<h3>Monte seu setup</h3>
-<p>Finalize a build perfeita para você.</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<footer>
-
-<p>© 2026 BYP - Build Your PC</p>
-
-</footer>
-
-    <script src="../js/auth.js"></script>
+      // Diz para o observador vigiar cada um dos elementos
+      elementosParaAnimar.forEach(el => observador.observe(el));
+    });
+  </script>
 </body>
 </html>

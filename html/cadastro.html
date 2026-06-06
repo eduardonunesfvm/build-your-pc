@@ -8,16 +8,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 
 <body>
 
   <main class="page">
 
-    <!-- Overlay escuro -->
     <div class="overlay"></div>
 
-    <!-- Card de registro -->
     <section class="register-card">
 
       <header class="register-header">
@@ -25,10 +24,9 @@
         <h2 class="subtitle">Cadastro</h2>
       </header>
 
-      <form class="cadastro-form">
+      <form class="cadastro-form" id="form-cadastro">
 
-         <!-- Nome -->
-        <div class="field">
+         <div class="field">
           <label for="username">Nome <span class="required">*</span></label>
           <input 
             type="text" 
@@ -38,9 +36,8 @@
           >
         </div>
 
-        <!-- E-mail Usuário -->
         <div class="field">
-          <label for="e-mail">E-mail <span class="required">*</span></label>
+          <label for="email">E-mail <span class="required">*</span></label>
           <input 
             type="email" 
             id="email" 
@@ -50,7 +47,6 @@
           >
         </div>
 
-        <!-- Senha -->
         <div class="field password-field">
           <label for="password">Senha <span class="required">*</span></label>
           <div class="input-wrapper">
@@ -64,10 +60,21 @@
               👁
             </button>
           </div>
-        </div>
+          
+          <div class="requisitos-senha" id="requisitos-senha">
+            <p id="req-maiuscula" class="invalido">
+              <i class="fa-solid fa-circle-xmark"></i> Pelo menos uma letra maiúscula
+            </p>
+            <p id="req-numero" class="invalido">
+              <i class="fa-solid fa-circle-xmark"></i> Pelo menos um número
+            </p>
+            <p id="req-especial" class="invalido">
+              <i class="fa-solid fa-circle-xmark"></i> Pelo menos um caractere especial (!@#$...)
+            </p>
+          </div>
+          </div>
 
-       <!-- Confirmar Senha -->
-        <div class="field password-field">
+       <div class="field password-field">
           <label for="confirm-password">Confirmar Senha <span class="required">*</span></label>
           <div class="input-wrapper">
             <input 
@@ -85,26 +92,31 @@
        <button class="btn">Cadastrar</button>
 
         <p class="register-text">
-          Já possui uma conta?
+          Já possui uma conta? <a href="login.html" class="loginfinal">Faça Login</a>
         </p>
-        
-       <a  href="login.html" class="loginfinal">Login</a>
 
-      </form>
-
-      <!-- Social -->
-      <footer class="register-footer">
-        <div class="social-icons">
-          <a href="#">X</a>
-          <a href="#">Instagram</a>
+        <div class="sso-divider">
+          <span>ou conecte-se com</span>
         </div>
 
-        <a href="../html/index.html" class="back-link">Voltar</a>
-      </footer>
+        <div class="sso-buttons">
+          <button type="button" class="btn-sso btn-google">
+            <i class="fa-brands fa-google"></i> Google
+          </button>
+          <button type="button" class="btn-sso btn-github">
+            <i class="fa-brands fa-github"></i> GitHub
+          </button>
+        </div>
 
+        <div style="text-align: center; margin-top: 15px;">
+          <a href="../html/index.html" class="back-link">Voltar</a>
+        </div>
+
+      </form>
     </section>
   </main>
 
+  <script src="../js/acessibilidade.js"></script>
   <script src="../js/auth.js"></script>
 </body>
 </html>

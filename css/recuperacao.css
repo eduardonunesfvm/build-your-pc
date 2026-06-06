@@ -140,3 +140,123 @@
 .back-link:hover {
   text-decoration: underline;
 }
+
+/* ── WIDGET DE ACESSIBILIDADE FLUTUANTE ───────────────────── */
+
+.a11y-widget {
+  position: fixed;
+  bottom: 20px;
+  left: 20px; /* Mantém na esquerda para não cobrir Toasts na direita */
+  z-index: 999999;
+}
+
+.a11y-btn-flutuante {
+  background: #00ffae;
+  color: #0b0c10;
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 255, 174, 0.4);
+  transition: transform 0.2s ease;
+}
+
+.a11y-btn-flutuante:hover {
+  transform: scale(1.08);
+}
+
+.a11y-menu {
+  position: absolute;
+  bottom: 55px;
+  left: 0;
+  background: #11141e;
+  border: 1px solid #202736;
+  border-radius: 6px;
+  width: 220px;
+  padding: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.a11y-menu.aberto {
+  display: flex;
+}
+
+.a11y-header {
+  font-family: 'Orbitron', sans-serif;
+  color: #00ffae;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #202736;
+  padding-bottom: 6px;
+}
+
+.a11y-menu button {
+  background: #181d2a;
+  border: 1px solid #2d374d;
+  color: #c5c6c7;
+  padding: 10px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: 0.2s;
+}
+
+.a11y-menu button:hover {
+  border-color: #00ffae;
+  color: #fff;
+  background: #1e2535;
+}
+
+/* ── CLASSES INTERNAS DE MODIFICAÇÃO (BODY) ───────────────── */
+
+/* 1. Tamanhos de Fonte */
+body.fonte-aumentar p, body.fonte-aumentar span, body.fonte-aumentar button, body.fonte-aumentar td, body.fonte-aumentar label {
+  font-size: 115% !important;
+}
+body.fonte-aumentar h1 { font-size: 130% !important; }
+body.fonte-aumentar h2 { font-size: 125% !important; }
+
+body.fonte-diminuir p, body.fonte-diminuir span, body.fonte-diminuir button, body.fonte-diminuir td, body.fonte-diminuir label {
+  font-size: 90% !important;
+}
+
+/* 2. Fonte para Dislexia (Aumenta o tracking/spacing e força uma tipografia limpa) */
+body.fonte-dislexia * {
+  font-family: Arial, sans-serif !important;
+  letter-spacing: 0.08em !important;
+  word-spacing: 0.12em !important;
+  line-height: 1.7 !important;
+}
+
+/* 3. Alto Contraste (Garante fundos totalmente pretos e textos com máxima legibilidade) */
+body.alto-contraste {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+body.alto-contraste .card, 
+body.alto-contraste .card-build, 
+body.alto-contraste .modal-byp,
+body.alto-contraste .diff-box {
+  background: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+body.alto-contraste * {
+  color: #ffffff !important;
+}
+body.alto-contraste button, body.alto-contraste .btn-cta-final {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #ffffff !important;
+}

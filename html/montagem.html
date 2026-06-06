@@ -10,8 +10,7 @@
   
 </head>
 <body>
-  <!-- HEADER -->
- <header class="header">
+  <header class="header">
     <a href="index.html" class="header-logo">BYP</a>
     
     <div class="header-titulo">MONTE SEU PC</div>
@@ -22,24 +21,28 @@
             <span class="total-label">Total</span>
             <span class="total-valor" id="total-geral">R$ 0</span>
         </div>
+
+        <a href="admin.html" class="btn-admin">
+          <i class="fa-solid fa-screwdriver-wrench"></i> ADMIN
+        </a>
         
-        <button class="btn-nova" id="btn-historico">MINHAS BUILDS</button>
+        <button class="btn-nova" id="btn-historico" onclick="navegarComTransicao('builds.html')">
+          <i class="fa-solid fa-folder-open"></i> MINHAS BUILDS
+        </button>
+        
         <button class="btn-salvar" onclick="salvarBuild()">SALVAR CONFIGURAÇÃO</button>
         <button class="btn-nova" onclick="novaBuild()">NOVA BUILD</button>
     </div>
 </header>
 
-  <!-- OVERLAY -->
-<div class="overlay" id="overlay" onclick="fecharPainel()"></div>
+  <div class="overlay" id="overlay" onclick="fecharPainel()"></div>
 
 <div id="preview-lateral-container" class="preview-lateral">
     <img id="img-preview-grande" src="" alt="">
     <p id="preview-nome-grande"></p>
 </div>
 
-  <!-- PAINEL LATERAL -->
-<div class="painel" id="painel">
-    <!-- 1. Header com Título e Fechar -->
+  <div class="painel" id="painel">
     <div class="painel-header">
         <span class="painel-titulo" id="painel-titulo">COMPONENTE</span>
         <button class="painel-fechar" onclick="fecharPainel()">
@@ -47,22 +50,17 @@
         </button>
     </div>
 
-    <!-- 2. Busca -->
     <div class="painel-busca">
         <i class="fa-solid fa-magnifying-glass"></i>
         <input type="text" id="busca-input" placeholder="Buscar componente..." oninput="filtrarOpcoes()"/>
     </div>
 
-    <!-- 3. FILTROS (Intel, AMD, etc) - Fica bem aqui entre a busca e a lista -->
     <div class="painel-filtros" id="painel-filtros">
-        <!-- Os botões aparecerão aqui via JS -->
-    </div>  
+        </div>  
 
-    <!-- 4. Lista de Produtos -->
     <div class="painel-lista" id="painel-lista"></div>
 </div>
 
-  <!-- GRID -->
   <div class="wrapper">
     <div class="coluna">
       <p class="coluna-titulo">PEÇA</p>
@@ -74,8 +72,29 @@
     </div>
   </div>
 
+  <div class="modal-overlay" id="modal-nome-build">
+    <div class="modal-byp">
+      <div class="modal-byp-header">
+        <h2><i class="fa-solid fa-layer-group"></i> INICIAR NOVA CONFIGURAÇÃO</h2>
+      </div>
+      <div class="modal-byp-body">
+        <p>Dê um nome para o seu projeto para começar a escolher as peças.</p>
+        <div class="form-grupo-byp">
+          <label>Nome da Build</label>
+          <input type="text" id="input-nome-build" placeholder="Ex: PC Gamer 2026, Estúdio de Edição, Office Casual" autocomplete="off"/>
+        </div>
+      </div>
+      <div class="modal-byp-footer">
+        <button class="btn-byp-confirmar" onclick="confirmarNovaBuild()">Começar Montagem</button>
+      </div>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
 
+  <div class="toast" id="toast"></div>
+
+  <script src="../js/acessibilidade.js"></script>
   <script src="../js/montagem.js"></script>
 </body>
 </html>

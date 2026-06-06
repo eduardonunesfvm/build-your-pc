@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minhas Builds - Build Your PC</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet"/>
+  
+  <style>
+    /* Estilos Básicos */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body { background-color: #0b0c10; color: #c5c6c7; padding: 40px; }
+    
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 2px solid #1f2833; padding-bottom: 20px; }
+    .header-titulo h1 { font-family: 'Orbitron', sans-serif; color: #00ffae; font-size: 24px; letter-spacing: 1px; }
+    .header-titulo p { color: #666; font-size: 14px; margin-top: 4px; }
+    
+    .btn-voltar { background: none; border: none; color: #00ffae; font-size: 20px; cursor: pointer; margin-right: 15px; text-decoration: none; }
+    .btn-voltar:hover { color: #fff; }
+    
+    .grid-builds { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+    .card-build { background: #151922; border: 1px solid #232936; border-radius: 8px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.2s; }
+    .card-build:hover { border-color: #00ffae; transform: translateY(-2px); }
+    
+    .build-nome { color: #fff; font-size: 18px; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; font-family: 'Orbitron', sans-serif; }
+    .build-meta { color: #555; font-size: 12px; margin-bottom: 16px; }
+    .build-preco { color: #00ffae; font-size: 20px; font-weight: bold; margin-bottom: 20px; font-family: 'Orbitron', sans-serif; }
+    
+    .card-acoes { display: flex; gap: 12px; border-top: 1px solid #232936; padding-top: 16px; }
+    .btn-card { flex: 1; padding: 10px; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; }
+    .btn-editar { background: #00ffae; color: #0b0c10; font-family: 'Orbitron', sans-serif; font-size: 12px; }
+    .btn-editar:hover { background: #00cc8c; box-shadow: 0 0 10px rgba(0, 255, 174, 0.2); }
+    .btn-remover { background: #232936; color: #ff4d4d; border: 1px solid #3a4454; font-family: 'Orbitron', sans-serif; font-size: 12px; }
+    .btn-remover:hover { background: #ff4d4d; color: #fff; box-shadow: 0 0 10px rgba(255, 77, 77, 0.2); }
+    
+    .vazio { grid-column: 1 / -1; text-align: center; padding: 60px; color: #555; }
+    .vazio i { font-size: 48px; margin-bottom: 16px; color: #1f2833; }
+
+    /* ── ESTILOS DO MODAL CUSTOMIZADO DE CONFIRMAÇÃO ── */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(4, 5, 8, 0.9);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.aberto {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-byp {
+      background: #11141e;
+      border: 1px solid #202736;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 450px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 77, 77, 0.05);
+      text-align: left;
+    }
+
+    .modal-byp-header h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: #ff4d4d;
+      font-size: 18px;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .modal-byp-body p {
+      color: #8e94a6;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .modal-byp-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .btn-modal {
+      font-family: 'Orbitron', sans-serif;
+      border: none;
+      border-radius: 4px;
+      padding: 12px 20px;
+      font-weight: bold;
+      font-size: 13px;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-modal-cancelar {
+      background: #232936;
+      color: #c5c6c7;
+      border: 1px solid #3a4454;
+    }
+
+    .btn-modal-cancelar:hover {
+      background: #2d3545;
+      color: #fff;
+    }
+
+    .btn-modal-excluir {
+      background: #ff4d4d;
+      color: #fff;
+    }
+
+    .btn-modal-excluir:hover {
+      background: #e03e3e;
+      box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
+    }
+
+    /* ── WIDGET DE ACESSIBILIDADE FLUTUANTE ───────────────────── */
+
+.a11y-widget {
+  position: fixed;
+  bottom: 20px;
+  left: 20px; /* Mantém na esquerda para não cobrir Toasts na direita */
+  z-index: 999999;
+}
+
+.a11y-btn-flutuante {
+  background: #00ffae;
+  color: #0b0c10;
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 255, 174, 0.4);
+  transition: transform 0.2s ease;
+}
+
+.a11y-btn-flutuante:hover {
+  transform: scale(1.08);
+}
+
+.a11y-menu {
+  position: absolute;
+  bottom: 55px;
+  left: 0;
+  background: #11141e;
+  border: 1px solid #202736;
+  border-radius: 6px;
+  width: 220px;
+  padding: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.a11y-menu.aberto {
+  display: flex;
+}
+
+.a11y-header {
+  font-family: 'Orbitron', sans-serif;
+  color: #00ffae;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #202736;
+  padding-bottom: 6px;
+}
+
+.a11y-menu button {
+  background: #181d2a;
+  border: 1px solid #2d374d;
+  color: #c5c6c7;
+  padding: 10px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: 0.2s;
+}
+
+.a11y-menu button:hover {
+  border-color: #00ffae;
+  color: #fff;
+  background: #1e2535;
+}
+
+/* ── CLASSES INTERNAS DE MODIFICAÇÃO (BODY) ───────────────── */
+
+/* 1. Tamanhos de Fonte */
+body.fonte-aumentar p, body.fonte-aumentar span, body.fonte-aumentar button, body.fonte-aumentar td, body.fonte-aumentar label {
+  font-size: 115% !important;
+}
+body.fonte-aumentar h1 { font-size: 130% !important; }
+body.fonte-aumentar h2 { font-size: 125% !important; }
+
+body.fonte-diminuir p, body.fonte-diminuir span, body.fonte-diminuir button, body.fonte-diminuir td, body.fonte-diminuir label {
+  font-size: 90% !important;
+}
+
+/* 2. Fonte para Dislexia (Aumenta o tracking/spacing e força uma tipografia limpa) */
+body.fonte-dislexia * {
+  font-family: Arial, sans-serif !important;
+  letter-spacing: 0.08em !important;
+  word-spacing: 0.12em !important;
+  line-height: 1.7 !important;
+}
+
+/* 3. Alto Contraste (Garante fundos totalmente pretos e textos com máxima legibilidade) */
+body.alto-contraste {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+body.alto-contraste .card, 
+body.alto-contraste .card-build, 
+body.alto-contraste .modal-byp,
+body.alto-contraste .diff-box {
+  background: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+body.alto-contraste * {
+  color: #ffffff !important;
+}
+body.alto-contraste button, body.alto-contraste .btn-cta-final {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div style="display: flex; align-items: center;">
+      <a href="montagem.html" class="btn-voltar" title="Voltar para Montagem"><i class="fa-solid fa-arrow-left"></i></a>
+      <div class="header-titulo">
+        <h1>MINHAS BUILDS SALVAS</h1>
+        <p>Gerencie e carregue suas configurações personalizadas</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="grid-builds" id="container-builds">
+    </div>
+
+  <div class="modal-overlay" id="modal-deletar-build">
+    <div class="modal-byp">
+      <div class="modal-byp-header">
+        <h2><i class="fa-solid fa-triangle-exclamation"></i> REMOVER CONFIGURAÇÃO?</h2>
+      </div>
+      <div class="modal-byp-body">
+        <p>Tem a certeza de que deseja excluir esta configuração de build? Esta ação não poderá ser desfeita.</p>
+      </div>
+      <div class="modal-byp-footer">
+        <button class="btn-modal btn-modal-cancelar" onclick="fecharModalDeletar()">Cancelar</button>
+        <button class="btn-modal btn-modal-excluir" onclick="confirmarExclusaoCustom()">Excluir Build</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/acessibilidade.js"></script>
+  <script>
+    // Bloqueia acesso se não estiver logado
+    if (localStorage.getItem('logado') != 'true') {
+      window.location.href = 'login.html';
+    }
+
+    // Variável global para armazenar temporariamente o ID do item a ser excluído
+    var idBuildParaDeletar = "";
+
+    function renderizarBuilds() {
+      var container = document.getElementById('container-builds');
+      var listaBuilds = JSON.parse(localStorage.getItem('byp_lista_builds') || '[]');
+
+      if (listaBuilds.length === 0) {
+        container.innerHTML = `
+          <div class="vazio">
+            <i class="fa-solid fa-folder-open"></i>
+            <p>Você ainda não possui nenhuma build salva.</p>
+          </div>`;
+        return;
+      }
+
+      container.innerHTML = listaBuilds.map(function(build) {
+        return `
+          <div class="card-build">
+            <div>
+              <div class="build-nome">${build.nome}</div>
+              <div class="build-meta"><i class="fa-regular fa-calendar"></i> Salva em: ${build.data}</div>
+              <div class="build-preco">R$ ${build.total.toLocaleString('pt-BR')}</div>
+            </div>
+            <div class="card-acoes">
+              <button class="btn-card btn-editar" onclick="carregarBuild('${build.id}')">
+                <i class="fa-regular fa-pen-to-square"></i> Editar
+              </button>
+              <button class="btn-card btn-remover" onclick="deletarBuild('${build.id}')" title="Excluir">
+                <i class="fa-regular fa-trash-can"></i> Remover
+              </button>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    function carregarBuild(id) {
+      var listaBuilds = JSON.parse(localStorage.getItem('byp_lista_builds') || '[]');
+      var buildEscolhida = listaBuilds.find(function(b) { return b.id === id; });
+
+      if (buildEscolhida) {
+        localStorage.setItem('byp_id_build_atual', buildEscolhida.id);
+        localStorage.setItem('byp_nome_build_atual', buildEscolhida.nome);
+        localStorage.setItem('byp_build', JSON.stringify(buildEscolhida.pecas));
+        window.location.href = 'montagem.html';
+      }
+    }
+
+    // ── CONTROLE DO MODAL CUSTOMIZADO ──
+    function deletarBuild(id) {
+      idBuildParaDeletar = id; // Guarda o ID selecionado
+      document.getElementById('modal-deletar-build').classList.add('aberto'); // Abre o modal
+    }
+
+    function fecharModalDeletar() {
+      idBuildParaDeletar = ""; // Limpa o ID
+      document.getElementById('modal-deletar-build').classList.remove('aberto'); // Fecha o modal
+    }
+
+    function confirmarExclusaoCustom() {
+      if (idBuildParaDeletar === "") return;
+
+      var listaBuilds = JSON.parse(localStorage.getItem('byp_lista_builds') || '[]');
+      listaBuilds = listaBuilds.filter(function(b) { return b.id !== idBuildParaDeletar; });
+      
+      localStorage.setItem('byp_lista_builds', JSON.stringify(listaBuilds));
+      
+      // Se a build deletada for a que estava ativa no rascunho, limpa o rascunho
+      if (localStorage.getItem('byp_id_build_atual') === idBuildParaDeletar) {
+        localStorage.removeItem('byp_id_build_atual');
+        localStorage.removeItem('byp_nome_build_atual');
+        localStorage.removeItem('byp_build');
+      }
+
+      fecharModalDeletar();
+      renderizarBuilds();
+    }
+
+    // Inicializa a renderização dos cards na tela
+    renderizarBuilds();
+  </script>
+</body>
+</html>

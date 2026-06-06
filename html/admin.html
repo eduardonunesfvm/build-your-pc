@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BYP — Painel Administrativo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="../css/admin.css"/>
+
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-esq">
+      <a href="montagem.html" class="btn-voltar"><i class="fa-solid fa-arrow-left"></i></a>
+      <div class="header-titulo">
+        <h1>PAINEL ADMINISTRATIVO</h1>
+        <p>Gerencie componentes e peças</p>
+      </div>
+    </div>
+    <button class="btn-adicionar" onclick="abrirModalAdicionar()">
+      <i class="fa-solid fa-plus"></i> Adicionar Componente
+    </button>
+  </header>
+
+  <div class="toolbar">
+    <div class="busca-wrapper">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="input-busca" placeholder="Buscar componentes..." oninput="filtrar()"/>
+    </div>
+    <select class="filtro-select" id="filtro-categoria" onchange="filtrar()">
+      <option value="">Todas as categorias</option>
+      <option value="processador">Processador</option>
+      <option value="placa-video">Placa de Vídeo</option>
+      <option value="memoria">Memória</option>
+      <option value="placa-mae">Placa-Mãe</option>
+      <option value="armazenamento">Armazenamento</option>
+      <option value="fonte">Fonte</option>
+      <option value="gabinete">Gabinete</option>
+      <option value="cooler">Cooler</option>
+    </select>
+  </div>
+
+  <div class="abas">
+    <button class="aba ativa" onclick="trocarAba('lista', this)">Lista de Componentes</button>
+    <button class="aba" onclick="trocarAba('categoria', this)">Por Categoria</button>
+    <button class="aba" onclick="trocarAba('usuarios', this)">Gerenciar Usuários</button>
+  </div>
+
+  <div class="conteudo">
+
+    <div class="aba-conteudo ativa" id="aba-lista">
+      <div class="tabela-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>COMPONENTE</th>
+              <th>CATEGORIA</th>
+              <th>ESPECIFICAÇÕES</th>
+              <th>PREÇO</th>
+              <th>AÇÕES</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-corpo"></tbody>
+        </table>
+        <div class="rodape-tabela" id="rodape-tabela"></div>
+      </div>
+    </div>
+
+    <div class="aba-conteudo" id="aba-categoria">
+      <div class="grid-categorias" id="grid-categorias"></div>
+    </div>
+
+    <div class="aba-conteudo" id="aba-usuarios">
+      <div class="usuarios-grid" id="usuarios-grid"></div>
+    </div>
+
+  </div>
+
+  <div class="modal-overlay" id="modal-form">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-titulo" id="modal-form-titulo">ADICIONAR COMPONENTE</span>
+        <button class="modal-fechar" onclick="fecharModal('modal-form')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="form-id"/>
+        
+        <div class="form-grupo">
+          <label>Nome do componente</label>
+          <input type="text" id="form-nome" placeholder="Ex: Intel Core i9-13900K"/>
+        </div>
+        
+        <div class="form-linha">
+          <div class="form-grupo">
+            <label>Categoria</label>
+            <select id="form-categoria">
+              <option value="processador">Processador</option>
+              <option value="placa-video">Placa de Vídeo</option>
+              <option value="memoria">Memória</option>
+              <option value="placa-mae">Placa-Mãe</option>
+              <option value="armazenamento">Armazenamento</option>
+              <option value="fonte">Fonte</option>
+              <option value="gabinete">Gabinete</option>
+              <option value="cooler">Cooler</option>
+            </select>
+          </div>
+          <div class="form-grupo">
+            <label>Preço (R$)</label>
+            <input type="number" id="form-preco" placeholder="0" min="0"/>
+          </div>
+        </div>
+
+        <div class="form-linha">
+          <div class="form-grupo">
+            <label>Marca</label>
+            <input type="text" id="form-marca" placeholder="Ex: Intel, AMD, ASUS, Corsair"/>
+          </div>
+          <div class="form-grupo">
+            <label>Série (Opcional)</label>
+            <input type="text" id="form-serie" placeholder="Ex: i9, Ryzen 5, DDR5"/>
+          </div>
+        </div>
+
+        <div class="form-grupo">
+          <label>Caminho da Imagem (Opcional)</label>
+          <input type="text" id="form-imagem" placeholder="Ex: ../img/i5.png"/>
+        </div>
+        <div class="form-grupo">
+          <label>Especificações</label>
+          <textarea id="form-specs" placeholder="Ex: 24 cores, 32 threads, 5.8GHz"></textarea>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="btn-cancelar" onclick="fecharModal('modal-form')">Cancelar</button>
+        <button class="btn-confirmar" onclick="salvarComponente()">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-excluir">
+    <div class="modal modal-excluir">
+      <div class="modal-body">
+        <div class="excluir-icone"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <div class="excluir-titulo">Remover componente?</div>
+        <div class="excluir-desc" id="excluir-desc">Esta ação não pode ser desfeita.</div>
+      </div>
+      <div class="modal-footer" style="justify-content:center; gap:12px;">
+        <button class="btn-cancelar" onclick="fecharModal('modal-excluir')">Cancelar</button>
+        <button class="btn-excluir-confirmar" onclick="confirmarExclusao()">
+          <i class="fa-solid fa-trash"></i> Remover
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="../js/acessibilidade.js"></script>
+  <script>
+    // ── DADOS ──────────────────────────────────────────────────
+
+    var componentes = JSON.parse(localStorage.getItem('byp_componentes') || 'null') || [
+      { id: 1, nome: 'Intel Core i9-13900K',   categoria: 'processador',   specs: '24 cores, 32 threads, 5.8GHz',     preco: 3699, marca: 'Intel', serie: 'i9', imagem: '../img/i9.png' },
+      { id: 2, nome: 'AMD Ryzen 9 7950X',      categoria: 'processador',   specs: '16 cores, 32 threads, 5.7GHz',     preco: 3499, marca: 'AMD', serie: 'Ryzen 9', imagem: '../img/r9.png' },
+      { id: 3, nome: 'Intel Core i7-13700K',    categoria: 'processador',   specs: '16 cores, 24 threads, 5.4GHz',     preco: 1899, marca: 'Intel', serie: 'i7', imagem: '../img/i7.png' },
+      { id: 4, nome: 'AMD Ryzen 5 7600X',       categoria: 'processador',   specs: '6 cores, 12 threads, 5.3GHz',      preco: 1349, marca: 'AMD', serie: 'Ryzen 5', imagem: '../img/r5.png' },
+      { id: 5, nome: 'NVIDIA RTX 4090',         categoria: 'placa-video',   specs: '24GB GDDR6X, 450W TDP',            preco: 12999, marca: 'NVIDIA', serie: 'RTX 4090', imagem: '' },
+      { id: 6, nome: 'AMD RX 7900 XTX',         categoria: 'placa-video',   specs: '24GB GDDR6, 355W TDP',             preco: 7999, marca: 'AMD', serie: 'RX 7900', imagem: '../img/rx7900xt.png' },
+      { id: 7, nome: 'RTX 3060 12GB',           categoria: 'placa-video',   specs: 'NVIDIA Ampere, 12GB GDDR6',        preco: 1799, marca: 'NVIDIA', serie: 'RTX 3060', imagem: '../img/rtx3060.png' },
+      { id: 8, nome: 'Corsair Vengeance 32GB',  categoria: 'memoria',       specs: '2x16GB DDR5-6000, CL36',           preco: 899, marca: 'Corsair', serie: 'DDR5', imagem: '../img/corsair-ddr4.png' },
+      { id: 9, nome: 'Kingston Fury 16GB',      categoria: 'memoria',       specs: '2x8GB DDR4-3200, CL16',            preco: 299, marca: 'Kingston', serie: 'DDR4', imagem: '../img/kingston-ddr4.png' },
+      { id:10, nome: 'ASUS ROG Crosshair X670', categoria: 'placa-mae',     specs: 'AMD AM5, ATX, Wi-Fi 6E',           preco: 2999, marca: 'ASUS', serie: 'X670', imagem: '' },
+      { id:11, nome: 'MSI MAG B660M DDR4',      categoria: 'placa-mae',     specs: 'Intel LGA1700, mATX',              preco: 599, marca: 'MSI', serie: 'B660M', imagem: '../img/asus-b660m-pro-rs-ddr4.png' },
+      { id:12, nome: 'Samsung 990 Pro 1TB',     categoria: 'armazenamento', specs: 'NVMe PCIe 4.0, 7450MB/s leitura', preco: 499, marca: 'Samsung', serie: '990 Pro', imagem: '' },
+      { id:13, nome: 'Seagate Barracuda 2TB',   categoria: 'armazenamento', specs: 'HDD SATA III, 7200RPM',            preco: 249, marca: 'Seagate', serie: 'Barracuda', imagem: '' },
+      { id:14, nome: 'Corsair RM850x',          categoria: 'fonte',         specs: '850W, 80 Plus Gold, Modular',      preco: 849, marca: 'Corsair', serie: 'RM', imagem: '' },
+      { id:15, nome: 'NZXT H510',               categoria: 'gabinete',      specs: 'ATX Mid Tower, vidro temperado',   preco: 599, marca: 'NZXT', serie: 'H Series', imagem: '../img/nzxt-h510.png' },
+      { id:16, nome: 'Noctua NH-D15',           categoria: 'cooler',        specs: 'Air cooler, 2x140mm, 250W TDP',    preco: 699, marca: 'Noctua', serie: 'NH', imagem: '../img/noctua-nh-d15.png' },
+    ];
+
+    var usuarios = [
+      { nome: 'Eduardo Nunes',    email: 'eduardo@email.com', role: 'admin' },
+      { nome: 'Fernanda Watanabe',email: 'fernanda@email.com',role: 'user'  },
+      { nome: 'Guilherme Fabrão', email: 'guilherme@email.com',role:'user'  },
+    ];
+
+    var proximoId  = componentes.reduce(function(m, c){ return Math.max(m, c.id); }, 0) + 1;
+    var idExcluindo = null;
+
+    var LABELS = {
+      'processador':   'PROCESSADOR',
+      'placa-video':   'PLACA DE VÍDEO',
+      'memoria':       'MEMÓRIA',
+      'placa-mae':     'PLACA-MÃE',
+      'armazenamento': 'ARMAZENAMENTO',
+      'fonte':         'FONTE',
+      'gabinete':      'GABINETE',
+      'cooler':        'COOLER',
+    };
+
+    // ── SALVAR NO LOCALSTORAGE ──────────────────────────────────
+    function salvarLS() {
+      localStorage.setItem('byp_componentes', JSON.stringify(componentes));
+    }
+
+    // ── RENDERIZAR TABELA ───────────────────────────────────────
+    function renderTabela() {
+      var busca  = document.getElementById('input-busca').value.toLowerCase();
+      var cat    = document.getElementById('filtro-categoria').value;
+      var filtrados = componentes.filter(function(c) {
+        var matchBusca = c.nome.toLowerCase().indexOf(busca) >= 0 ||
+                         c.specs.toLowerCase().indexOf(busca) >= 0;
+        var matchCat   = cat === '' || c.categoria === cat;
+        return matchBusca && matchCat;
+      });
+
+      var corpo = document.getElementById('tabela-corpo');
+      var rodape = document.getElementById('rodape-tabela');
+
+      if (filtrados.length === 0) {
+        corpo.innerHTML = '<tr><td colspan="5"><div class="vazio"><i class="fa-solid fa-box-open"></i><p>Nenhum componente encontrado.</p></div></td></tr>';
+        rodape.textContent = '';
+        return;
+      }
+
+      corpo.innerHTML = filtrados.map(function(c) {
+        return '<tr>' +
+          '<td class="td-nome">' + c.nome + '</td>' +
+          '<td><span class="badge-categoria">' + (LABELS[c.categoria] || c.categoria) + '</span></td>' +
+          '<td class="td-specs">' + c.specs + '</td>' +
+          '<td class="td-preco">R$ ' + c.preco.toLocaleString('pt-BR') + '</td>' +
+          '<td><div class="acoes">' +
+            '<button class="btn-acao btn-editar" onclick="abrirModalEditar(' + c.id + ')" title="Editar"><i class="fa-regular fa-pen-to-square"></i></button>' +
+            '<button class="btn-acao btn-excluir" onclick="abrirModalExcluir(' + c.id + ')" title="Remover"><i class="fa-regular fa-trash-can"></i></button>' +
+          '</div></td>' +
+        '</tr>';
+      }).join('');
+
+      rodape.textContent = 'Total: ' + filtrados.length + ' componente(s)';
+    }
+
+    // ── RENDERIZAR GRID POR CATEGORIA ───────────────────────────
+    function renderCategorias() {
+      var grid = document.getElementById('grid-categorias');
+      var cats = Object.keys(LABELS);
+      grid.innerHTML = cats.map(function(cat) {
+        var itens = componentes.filter(function(c){ return c.categoria === cat; });
+        if (itens.length === 0) return '';
+        return '<div class="card-categoria">' +
+          '<div class="card-cat-header">' +
+            '<span class="card-cat-titulo">' + LABELS[cat] + '</span>' +
+            '<span class="card-cat-count">' + itens.length + ' itens</span>' +
+          '</div>' +
+          itens.map(function(c) {
+            return '<div class="card-cat-item">' +
+              '<span>' + c.nome + '</span>' +
+              '<span class="card-cat-item-preco">R$ ' + c.preco.toLocaleString('pt-BR') + '</span>' +
+            '</div>';
+          }).join('') +
+        '</div>';
+      }).join('');
+    }
+
+    // ── RENDERIZAR USUÁRIOS ─────────────────────────────────────
+    function renderUsuarios() {
+      var grid = document.getElementById('usuarios-grid');
+      grid.innerHTML = usuarios.map(function(u) {
+        var inicial = u.nome.charAt(0).toUpperCase();
+        return '<div class="card-usuario">' +
+          '<div class="avatar-usuario">' + inicial + '</div>' +
+          '<div class="usuario-info">' +
+            '<div class="usuario-nome">' + u.nome + '</div>' +
+            '<div class="usuario-email">' + u.email + '</div>' +
+          '</div>' +
+          '<span class="badge-role badge-' + u.role + '">' + u.role.toUpperCase() + '</span>' +
+        '</div>';
+      }).join('');
+    }
+
+    // ── FILTRAR ─────────────────────────────────────────────────
+    function filtrar() { renderTabela(); }
+
+    // ── ABAS ────────────────────────────────────────────────────
+    function trocarAba(id, btn) {
+      document.querySelectorAll('.aba').forEach(function(a){ a.classList.remove('ativa'); });
+      document.querySelectorAll('.aba-conteudo').forEach(function(a){ a.classList.remove('ativa'); });
+      btn.classList.add('ativa');
+      document.getElementById('aba-' + id).classList.add('ativa');
+    }
+
+    // ── MODAL ADICIONAR ─────────────────────────────────────────
+    function abrirModalAdicionar() {
+      document.getElementById('modal-form-titulo').textContent = 'ADICIONAR COMPONENTE';
+      document.getElementById('form-id').value    = '';
+      document.getElementById('form-nome').value  = '';
+      document.getElementById('form-preco').value = '';
+      document.getElementById('form-specs').value = '';
+      document.getElementById('form-categoria').value = 'processador';
+      
+      // NOVOS CAMPOS LIMPOS:
+      document.getElementById('form-marca').value = '';
+      document.getElementById('form-serie').value = '';
+      document.getElementById('form-imagem').value = '';
+
+      document.getElementById('modal-form').classList.add('aberto');
+    }
+
+    // ── MODAL EDITAR ────────────────────────────────────────────
+    function abrirModalEditar(id) {
+      var c = componentes.find(function(x){ return x.id === id; });
+      if (!c) return;
+      document.getElementById('modal-form-titulo').textContent = 'EDITAR COMPONENTE';
+      document.getElementById('form-id').value        = c.id;
+      document.getElementById('form-nome').value      = c.nome;
+      document.getElementById('form-preco').value     = c.preco;
+      document.getElementById('form-specs').value     = c.specs;
+      document.getElementById('form-categoria').value = c.categoria;
+      
+      // PREENCHE OS NOVOS CAMPOS SE ELES EXISTIREM:
+      document.getElementById('form-marca').value     = c.marca || '';
+      document.getElementById('form-serie').value     = c.serie || '';
+      document.getElementById('form-imagem').value    = c.imagem || '';
+
+      document.getElementById('modal-form').classList.add('aberto');
+    }
+
+    // ── SALVAR COMPONENTE ───────────────────────────────────────
+    function salvarComponente() {
+      var id    = document.getElementById('form-id').value;
+      var nome  = document.getElementById('form-nome').value.trim();
+      var cat   = document.getElementById('form-categoria').value;
+      var preco = parseFloat(document.getElementById('form-preco').value);
+      var specs = document.getElementById('form-specs').value.trim();
+      
+      // CAPTURA DOS NOVOS CAMPOS:
+      var marca  = document.getElementById('form-marca').value.trim();
+      var serie  = document.getElementById('form-serie').value.trim();
+      var imagem = document.getElementById('form-imagem').value.trim();
+
+      if (!nome || !specs || isNaN(preco) || preco < 0 || !marca) {
+        mostrarToast('Preencha todos os campos corretamente (Marca é obrigatória).', true);
+        return;
+      }
+
+      if (id) {
+        // editar
+        var idx = componentes.findIndex(function(c){ return c.id == id; });
+        if (idx >= 0) {
+          componentes[idx].nome      = nome;
+          componentes[idx].categoria = cat;
+          componentes[idx].preco     = preco;
+          componentes[idx].specs     = specs;
+          
+          // ATUALIZA AS NOVAS PROPRIEDADES:
+          componentes[idx].marca     = marca;
+          componentes[idx].serie     = serie;
+          componentes[idx].imagem    = imagem;
+        }
+        mostrarToast('Componente atualizado!');
+      } else {
+        // adicionar
+        componentes.push({ 
+          id: proximoId++, 
+          nome: nome, 
+          categoria: cat, 
+          preco: preco, 
+          specs: specs,
+          marca: marca,
+          serie: serie,
+          imagem: imagem 
+        });
+        mostrarToast('Componente adicionado!');
+      }
+
+      salvarLS();
+      fecharModal('modal-form');
+      renderTabela();
+      renderCategorias();
+    }
+
+    // ── MODAL EXCLUIR ───────────────────────────────────────────
+    function abrirModalExcluir(id) {
+      var c = componentes.find(function(x){ return x.id === id; });
+      if (!c) return;
+      idExcluindo = id;
+      document.getElementById('excluir-desc').textContent = 'Deseja remover "' + c.nome + '"? Esta ação não pode ser desfeita.';
+      document.getElementById('modal-excluir').classList.add('aberto');
+    }
+
+    function confirmarExclusao() {
+      componentes = componentes.filter(function(c){ return c.id !== idExcluindo; });
+      salvarLS();
+      fecharModal('modal-excluir');
+      renderTabela();
+      renderCategorias();
+      mostrarToast('Componente removido.');
+      idExcluindo = null;
+    }
+
+    // ── FECHAR MODAL ────────────────────────────────────────────
+    function fecharModal(id) {
+      document.getElementById(id).classList.remove('aberto');
+    }
+
+    // fechar clicando fora
+    document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) overlay.classList.remove('aberto');
+      });
+    });
+
+    // ── TOAST ───────────────────────────────────────────────────
+    function mostrarToast(msg, erro) {
+      var t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className   = 'toast visivel' + (erro ? ' erro' : '');
+      setTimeout(function(){ t.className = 'toast'; }, 3000);
+    }
+
+    // ── INICIALIZA ──────────────────────────────────────────────
+    renderTabela();
+    renderCategorias();
+    renderUsuarios();
+  </script>
+
+</body>
+</html>
