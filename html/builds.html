@@ -10,7 +10,24 @@
   <style>
     /* Estilos Básicos */
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-    body { background-color: #0b0c10; color: #c5c6c7; padding: 40px; }
+    
+    /* Forçamos o fundo do navegador a nascer escuro, eliminando o flash branco */
+    html {
+      background-color: #0b0c10 !important;
+    }
+
+    body { 
+      background-color: #0b0c10; 
+      color: #c5c6c7; 
+      padding: 40px;
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    /* Se o script disparar a saída, o body desbota para o fundo escuro do html */
+    body.pagina-saindo {
+      opacity: 0 !important;
+    }
     
     .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 2px solid #1f2833; padding-bottom: 20px; }
     .header-titulo h1 { font-family: 'Orbitron', sans-serif; color: #00ffae; font-size: 24px; letter-spacing: 1px; }
@@ -128,128 +145,189 @@
       box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
     }
 
+    /* ── TRANSIÇÃO DE TELA (PRELOADER) ── */
+    .page-transition {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #0b0c10;
+      z-index: 9999999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      transition: opacity 0.4s ease, visibility 0.4s;
+    }
+
+    .page-transition.loaded {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-byp {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-loader {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
+      color: #00ffae;
+      letter-spacing: 4px;
+      font-weight: bold;
+      text-shadow: 0 0 15px rgba(0, 255, 174, 0.5);
+      animation: pulsar 1.2s infinite ease-in-out;
+    }
+
+    @keyframes pulsar {
+      0%, 100% { opacity: 0.5; transform: scale(0.98); }
+      50% { opacity: 1; transform: scale(1.02); }
+    }
+
     /* ── WIDGET DE ACESSIBILIDADE FLUTUANTE ───────────────────── */
+    .a11y-widget {
+      position: fixed;
+      bottom: 25px;
+      left: 25px;
+      z-index: 999999;
+      font-family: 'Orbitron', sans-serif;
+    }
 
-.a11y-widget {
-  position: fixed;
-  bottom: 20px;
-  left: 20px; /* Mantém na esquerda para não cobrir Toasts na direita */
-  z-index: 999999;
-}
+    .a11y-btn-flutuante {
+      background: #00ffae;
+      color: #0b0c10;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(0, 255, 174, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
 
-.a11y-btn-flutuante {
-  background: #00ffae;
-  color: #0b0c10;
-  border: none;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  font-size: 20px;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 255, 174, 0.4);
-  transition: transform 0.2s ease;
-}
+    .a11y-btn-flutuante:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba(0, 255, 174, 0.7);
+    }
 
-.a11y-btn-flutuante:hover {
-  transform: scale(1.08);
-}
+    .a11y-menu {
+      position: absolute;
+      bottom: 65px;
+      left: 0;
+      background: rgba(17, 20, 30, 0.95);
+      border: 1px solid #202736;
+      border-radius: 8px;
+      width: 240px;
+      padding: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+    }
 
-.a11y-menu {
-  position: absolute;
-  bottom: 55px;
-  left: 0;
-  background: #11141e;
-  border: 1px solid #202736;
-  border-radius: 6px;
-  width: 220px;
-  padding: 12px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.6);
-  display: none;
-  flex-direction: column;
-  gap: 8px;
-}
+    .a11y-menu.aberto {
+      display: flex;
+    }
 
-.a11y-menu.aberto {
-  display: flex;
-}
+    .a11y-header {
+      font-family: 'Orbitron', sans-serif;
+      color: #00ffae;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+      border-bottom: 1px solid #202736;
+      padding-bottom: 8px;
+      text-align: center;
+    }
 
-.a11y-header {
-  font-family: 'Orbitron', sans-serif;
-  color: #00ffae;
-  font-size: 11px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  margin-bottom: 4px;
-  border-bottom: 1px solid #202736;
-  padding-bottom: 6px;
-}
+    .a11y-menu button {
+      background: rgba(24, 29, 42, 0.6);
+      border: 1px solid #2d374d;
+      color: #c5c6c7;
+      padding: 10px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Segoe UI', sans-serif;
+      transition: all 0.2s ease;
+    }
 
-.a11y-menu button {
-  background: #181d2a;
-  border: 1px solid #2d374d;
-  color: #c5c6c7;
-  padding: 10px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  text-align: left;
-  font-size: 13px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  transition: 0.2s;
-}
+    .a11y-menu button i {
+      color: #00ffae;
+      font-size: 14px;
+      width: 16px;
+      text-align: center;
+    }
 
-.a11y-menu button:hover {
-  border-color: #00ffae;
-  color: #fff;
-  background: #1e2535;
-}
+    .a11y-menu button:hover {
+      border-color: #00ffae;
+      color: #fff;
+      background: #1e2535;
+      transform: translateX(3px);
+    }
 
-/* ── CLASSES INTERNAS DE MODIFICAÇÃO (BODY) ───────────────── */
+    /* ── CLASSES INTERNAS DE MODIFICAÇÃO (BODY) ───────────────── */
+    body.fonte-aumentar p, body.fonte-aumentar span, body.fonte-aumentar button, body.fonte-aumentar td, body.fonte-aumentar label {
+      font-size: 115% !important;
+    }
+    body.fonte-aumentar h1 { font-size: 130% !important; }
+    body.fonte-aumentar h2 { font-size: 125% !important; }
 
-/* 1. Tamanhos de Fonte */
-body.fonte-aumentar p, body.fonte-aumentar span, body.fonte-aumentar button, body.fonte-aumentar td, body.fonte-aumentar label {
-  font-size: 115% !important;
-}
-body.fonte-aumentar h1 { font-size: 130% !important; }
-body.fonte-aumentar h2 { font-size: 125% !important; }
+    body.fonte-diminuir p, body.fonte-diminuir span, body.fonte-diminuir button, body.fonte-diminuir td, body.fonte-diminuir label {
+      font-size: 90% !important;
+    }
 
-body.fonte-diminuir p, body.fonte-diminuir span, body.fonte-diminuir button, body.fonte-diminuir td, body.fonte-diminuir label {
-  font-size: 90% !important;
-}
+    body.fonte-dislexia * {
+      font-family: Arial, sans-serif !important;
+      letter-spacing: 0.08em !important;
+      word-spacing: 0.12em !important;
+      line-height: 1.7 !important;
+    }
 
-/* 2. Fonte para Dislexia (Aumenta o tracking/spacing e força uma tipografia limpa) */
-body.fonte-dislexia * {
-  font-family: Arial, sans-serif !important;
-  letter-spacing: 0.08em !important;
-  word-spacing: 0.12em !important;
-  line-height: 1.7 !important;
-}
-
-/* 3. Alto Contraste (Garante fundos totalmente pretos e textos com máxima legibilidade) */
-body.alto-contraste {
-  background: #000000 !important;
-  color: #ffffff !important;
-}
-body.alto-contraste .card, 
-body.alto-contraste .card-build, 
-body.alto-contraste .modal-byp,
-body.alto-contraste .diff-box {
-  background: #000000 !important;
-  border: 2px solid #ffffff !important;
-}
-body.alto-contraste * {
-  color: #ffffff !important;
-}
-body.alto-contraste button, body.alto-contraste .btn-cta-final {
-  background: #ffffff !important;
-  color: #000000 !important;
-  border: 2px solid #ffffff !important;
-}
+    body.alto-contraste {
+      background: #000000 !important;
+      color: #ffffff !important;
+    }
+    body.alto-contraste .card, 
+    body.alto-contraste .card-build, 
+    body.alto-contraste .modal-byp,
+    body.alto-contraste .diff-box {
+      background: #000000 !important;
+      border: 2px solid #ffffff !important;
+    }
+    body.alto-contraste * {
+      color: #ffffff !important;
+    }
+    body.alto-contraste button, body.alto-contraste .btn-cta-final {
+      background: #ffffff !important;
+      color: #000000 !important;
+      border: 2px solid #ffffff !important;
+    }
   </style>
 </head>
 <body>
+
+  <div class="page-transition" id="page-preloader">
+      <div class="loader-byp">
+          <span class="logo-loader">BYP</span>
+          <div class="barra-progresso"></div>
+      </div>
+  </div>
 
   <header class="header">
     <div style="display: flex; align-items: center;">
@@ -261,8 +339,7 @@ body.alto-contraste button, body.alto-contraste .btn-cta-final {
     </div>
   </header>
 
-  <div class="grid-builds" id="container-builds">
-    </div>
+  <div class="grid-builds" id="container-builds"></div>
 
   <div class="modal-overlay" id="modal-deletar-build">
     <div class="modal-byp">
@@ -286,7 +363,6 @@ body.alto-contraste button, body.alto-contraste .btn-cta-final {
       window.location.href = 'login.html';
     }
 
-    // Variável global para armazenar temporariamente o ID do item a ser excluído
     var idBuildParaDeletar = "";
 
     function renderizarBuilds() {
@@ -325,7 +401,6 @@ body.alto-contraste button, body.alto-contraste .btn-cta-final {
     function carregarBuild(id) {
       var listaBuilds = JSON.parse(localStorage.getItem('byp_lista_builds') || '[]');
       var buildEscolhida = listaBuilds.find(function(b) { return b.id === id; });
-
       if (buildEscolhida) {
         localStorage.setItem('byp_id_build_atual', buildEscolhida.id);
         localStorage.setItem('byp_nome_build_atual', buildEscolhida.nome);
@@ -334,26 +409,23 @@ body.alto-contraste button, body.alto-contraste .btn-cta-final {
       }
     }
 
-    // ── CONTROLE DO MODAL CUSTOMIZADO ──
     function deletarBuild(id) {
-      idBuildParaDeletar = id; // Guarda o ID selecionado
-      document.getElementById('modal-deletar-build').classList.add('aberto'); // Abre o modal
+      idBuildParaDeletar = id;
+      document.getElementById('modal-deletar-build').classList.add('aberto');
     }
 
     function fecharModalDeletar() {
-      idBuildParaDeletar = ""; // Limpa o ID
-      document.getElementById('modal-deletar-build').classList.remove('aberto'); // Fecha o modal
+      idBuildParaDeletar = "";
+      document.getElementById('modal-deletar-build').classList.remove('aberto');
     }
 
     function confirmarExclusaoCustom() {
       if (idBuildParaDeletar === "") return;
-
       var listaBuilds = JSON.parse(localStorage.getItem('byp_lista_builds') || '[]');
       listaBuilds = listaBuilds.filter(function(b) { return b.id !== idBuildParaDeletar; });
       
       localStorage.setItem('byp_lista_builds', JSON.stringify(listaBuilds));
       
-      // Se a build deletada for a que estava ativa no rascunho, limpa o rascunho
       if (localStorage.getItem('byp_id_build_atual') === idBuildParaDeletar) {
         localStorage.removeItem('byp_id_build_atual');
         localStorage.removeItem('byp_nome_build_atual');
@@ -364,8 +436,17 @@ body.alto-contraste button, body.alto-contraste .btn-cta-final {
       renderizarBuilds();
     }
 
-    // Inicializa a renderização dos cards na tela
     renderizarBuilds();
+
+    // Controla o sumiço do Preloader assim que a página está pronta
+    window.addEventListener('DOMContentLoaded', function() {
+      const preloader = document.getElementById('page-preloader');
+      if (preloader) {
+        setTimeout(function() {
+          preloader.classList.add('loaded');
+        }, 200); 
+      }
+    });
   </script>
 </body>
 </html>

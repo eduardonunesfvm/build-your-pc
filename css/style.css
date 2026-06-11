@@ -5,18 +5,20 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: #0f0f0f;
-  color: white;
-  opacity: 0;
-  animation: fadeIn 0.8s ease forwards; /* Removido o transform daqui para destravar o position: fixed */
+html {
+  background-color: #0b0c10 !important; /* Força o fundo a nascer escuro, eliminando o flash branco */
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0b0c10;
+  color: white;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+body.pagina-saindo {
+  opacity: 0 !important;
 }
 
 .container {
@@ -82,7 +84,7 @@ nav a:hover {
 
 .btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 15px #00ff9d41;    
+  box-shadow: 0 0 15px #00ff9d41;
 }
 
 .btn-login {
@@ -107,7 +109,7 @@ nav a:hover {
 /* ── HERO SECTION ────────────────────────────────────────── */
 .hero {
   position: relative;
-  background: url("../img/pcindex.png") center/cover no-repeat;
+  background: url("../img/pcindex.webp") center/cover no-repeat;
   height: 90vh;
   display: flex;
   align-items: center;
@@ -220,6 +222,8 @@ nav a:hover {
   width: 250px;
   position: relative;
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s;
+
+  transform: translateZ(0);
 }
 
 .card:hover {
@@ -263,6 +267,8 @@ nav a:hover {
   border-radius: 8px;
   border: 1px solid #1c2230;
   text-align: center;
+
+  transform: translateZ(0);
 }
 
 .diff-icon {
@@ -476,45 +482,68 @@ body.alto-contraste button, body.alto-contraste .btn-cta-final {
   border: 2px solid #ffffff !important;
 }
 
-/* ── ANIMAÇÃO DE REVELAÇÃO NO SCROLL ─────────────────────── */
-
-/* Estado inicial: oculto e empurrado 50px para baixo */
+/* ── ANIMAÇÃO DE REVELAÇÃO NO SCROLL (ULTRA COMPRIMIDA PARA GPU) ── */
 .reveal {
   opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  will-change: opacity, transform; /* Otimiza a performance da animação no navegador */
+  transform: translateY(30px); /* Diminuído para 30px: o scroll fica mais sutil e suave */
+  transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: opacity, transform; /* Isola o cálculo direto na placa de vídeo */
 }
 
-/* Estado ativo: visível e na posição original */
 .reveal.ativo {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Efeito cascata opcional: adiciona um pequeno delay para os cards não subirem todos juntos */
 .cards .card:nth-child(2),
 .diff-grid .diff-box:nth-child(2) {
-  transition-delay: 0.15s;
+  transition-delay: 0.1s;
 }
 
 .cards .card:nth-child(3),
 .diff-grid .diff-box:nth-child(3) {
-  transition-delay: 0.3s;
+  transition-delay: 0.2s;
 }
 
-/* ── TRANSIÇÃO SUAVE ENTRE PÁGINAS (PREMIUM) ────────────── */
-body {
-  opacity: 0;
-  transition: opacity 0.4s ease-in-out !important;
-}
-
-/* Classe ativada quando a página termina de carregar */
-body.pagina-carregada {
+/* Estilo do Preloader de Tela */
+.page-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #0b0c10;
+  z-index: 9999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 1;
+  transition: opacity 0.4s ease, visibility 0.4s;
 }
 
-/* Classe ativada no momento exato em que o usuário clica para sair */
-body.pagina-saindo {
-  opacity: 0 !important;
+.page-transition.loaded {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-byp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-loader {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 28px;
+  color: #00ffae;
+  letter-spacing: 4px;
+  font-weight: bold;
+  text-shadow: 0 0 15px rgba(0, 255, 174, 0.5);
+  animation: pulsar 1.2s infinite ease-in-out;
+}
+
+@keyframes pulsar {
+  0%, 100% { opacity: 0.5; transform: scale(0.98); }
+  50% { opacity: 1; transform: scale(1.02); }
 }

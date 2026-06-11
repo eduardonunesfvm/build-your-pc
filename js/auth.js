@@ -97,6 +97,18 @@ if (cadastroForm) {
     });
   }
 
+  function mostrarAlerta(mensagem) {
+    // Injeta o texto do aviso na caixinha
+    document.getElementById('modal-alerta-mensagem').textContent = mensagem;
+    // Abre o modal adicionando a classe 'ativo'
+    document.getElementById('modal-alerta').classList.add('ativo');
+  }
+
+  function fecharAlerta() {
+      // Fecha o modal removendo a classe
+      document.getElementById('modal-alerta').classList.remove('ativo');
+  }
+
   // Função interna auxiliar para trocar as classes de estilo e os ícones
   function atualizarIconeRequisito(elemento, condicaoSatisfeita) {
     const icone = elemento.querySelector('i');
@@ -128,17 +140,17 @@ if (cadastroForm) {
     const temEspecial = /[!@#$%^&*(),.?":{}|<>]/.test(senha);
 
     if (!tamanhoValido) {
-      alert('A senha deve ter no mínimo 8 caracteres.');
+      mostrarAlerta('A senha deve ter no mínimo 8 caracteres.');
       return;
     }
 
     if (!temMaiuscula || !temNumero || !temEspecial) {
-      alert('Sua senha está fraca! Garanta pelo menos uma letra maiúscula, um número e um caractere especial.');
+      mostrarAlerta('Sua senha está fraca! Garanta pelo menos uma letra maiúscula, um número e um caractere especial.');
       return;
     }
 
     if (senha !== campoConfirma.value) {
-      alert('As senhas não coincidem!');
+      mostrarAlerta('As senhas não coincidem!');
       return;
     }
 
